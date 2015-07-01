@@ -78,9 +78,9 @@ A string describing the type of the event. Possible values are:
 - <code>"note"</code> A musical note. 
 - <code>"chord"</code> A musical symbol describing the current key centre and mode.
 - <code>"sequence"</code> A sequence event carries the data for a sequence array, enabling the playback of nested sequences.
-- <code>"control"</code> A controller event.
-- <code>"pitch"</code> Pitch bend.
-- <code>"noteon"</code> and <code>"noteoff"</code>, for carrying MIDI-like note information.
+- <code>"control"</code> A controller event. <code>duration</code> is <code>0</code>.
+- <code>"pitch"</code> Pitch bend. <code>duration</code> is <code>0</code>.
+- <code>"noteon"</code> and <code>"noteoff"</code>, for carrying MIDI-like note information. <code>duration</code> is <code>0</code>.
 
 #### data
 
