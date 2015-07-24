@@ -88,6 +88,25 @@ A <code>"note"</code> event must have the data values <code>note number</code> a
 
     [time, duration, "note", number, velocity]
 
+A <code>"control"</code> event must have the data values <code>number</code> in the range 0-127, and <code>value</code> as a float in the range 0-1. Values outside this range are acceptable, but may be
+lost if converted to MIDI.
+
+    [time, duration, "control", number, value]
+
+It can also carry an optional string describing an automation curve. A curve should cause
+<code>value</code> to ramp to the new value at <code>time</code>.
+
+    [time, duration, "control", number, value, "exponential"]
+
+A <code>"pitch"</code> event must have the data value <code>semitones</code>, a float in the range -2 to 2.
+
+    [time, duration, "pitch", semitones]
+
+It can also carry an optional string describing an automation curve. A curve should cause
+<code>semitones</code> to ramp to the new value at <code>time</code>.
+
+    [time, duration, "pitch", semitones, "exponential"]
+
 A <code>"chord"</code> event must have a string that represents the current key centre and mode:
 
     [time, duration, "chord", symbol]
@@ -98,6 +117,12 @@ be interpreted by a music generator.
 A <code>"sequence"</code> event must have an array that contains the data of a 'child' sequence:
 
     [time, duration, "sequence", array]
+
+Possible curves are:
+
+    "step"
+    "linear"
+    "exponential"
 
 ## Interpretation (object)
 
@@ -112,9 +137,9 @@ music as sound, but required to render music visually.
 
 ## Implementations
 
-- <a href="http://github.com/sound-io/midi">MIDI</a> sound.io's MIDI library converts MIDI events to Music JSON events with it's <code>normaliseEvent</code> method.
+- <a href="http://github.com/sound-io/midi">MIDI</a> sound.io's MIDI library converts MIDI events to Music JSON events with it's <code>normalise</code> method.
 - <a href="http://labs.cruncher.ch/scribe/">Scribe</a> is a music notation
-interpreter and SVG renderer that consumes Music JSON.
+interpreter and SVG renderer that tries to consume Music JSON.
 
 ## References
 
