@@ -29,13 +29,13 @@ Here are the first two bars of Dolphin Dance represented in Music JSON:
         }
     }
 
-## Sequence (array)
+## sequence
 
 A sequence is an array of events.
 
     [event1, event2, ... ]
 
-## Event (array)
+## event
 
 An event is an array describing the time and type and the data needed to
 describe the event.
@@ -45,7 +45,7 @@ describe the event.
 An event MUST have a start <code>time</code> and a <code>type</code>.
 An event also contains extra data that is dependent on the type.
 
-### time (float)
+### time
 
 <code>time</code> is a float describing a point in time from the time the
 sequence is started.
@@ -54,7 +54,7 @@ sequence is started.
 in absolute time, like seconds. The actual time an event is played is dependent
 upon the rate at which a sequence is played.
 
-### type (string)
+### type
 
 A string describing the type of event. The type determines the structure of the
 rest of the data in the event array:
@@ -107,7 +107,7 @@ by a music generator to improvise music.
 <code>root</code> – STRING ["A","Bb","B", ... "F#","G","G#"], represents the root of the chord
 <code>mode</code> – STRING ["∆","-", ... TBD], represents the mode of the chord
 
-## Interpretation (object)
+## interpretation (object)
 
 The optional interpret object contains meta information not directly needed to render the
 music as sound, but required to render music as notation. A good renderer should
