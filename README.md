@@ -1,31 +1,25 @@
 # Music JSON proposal
 
-A proposal for a standard way of creating music sequence data in JSON
+A proposal for a standard format for representing music in JSON, with the aim of
+making emerging web apps using the new Web Audio and Web MIDI APIs interoperable.
 
-## Background
-
-This document aims to describe a way to describe musical information in JSON.
-The JSON should be minimal, easy to extract information from, easily readable by
-software, and easy to convert to other formats such as MIDI or OSC. It is bourne
-out of a need to standardise a way of exchanging music between emerging apps and
-web apps, and was discussed at Mozilla Festival London 2014.
-
-This spec is intended as a discussion starter. Please comment, propose ideas and
+This document is intended as a discussion starter. Please comment, propose ideas and
 make pull requests.
+
 
 ## Example JSON
 
-Here are the first two bars of Dolphin Dance, represented in Music JSON:
+Here are the first two bars of Dolphin Dance represented in Music JSON:
 
     {
         "sequence": [
-            [2,   0.5, "note", 76, 0.8],
-            [2.5, 0.5, "note", 77, 0.6],
-            [3,   0.5, "note", 79, 1],
-            [3.5, 3.5, "note", 74, 1],
-            [10,  0.5, "note", 76, 1],
-            [0, 4, "chord", "C∆"],
-            [4, 4, "chord", "G-"]
+            [2,   "note", 76, 0.8, 0.5],
+            [2.5, "note", 77, 0.6, 0.5],
+            [3,   "note", 79, 1, 0.5],
+            [3.5, "note", 74, 1, 3.5],
+            [10,  "note", 76, 1, 0.5],
+            [0,   "chord", "C", "∆", 4],
+            [4,   "chord", "G", "-", 4]
         ],
 
         "interpretation": {
@@ -45,89 +39,87 @@ A sequence is an array of events.
 
 ## Event (array)
 
-An event is an array describing the timing, duration and type and any extra data
-associated with an event.
+An event is an array describing the time and type and the data needed to
+describe the event.
 
-    [time, duration, type, data ...]
+    [time, type, data ...]
 
-An event MUST have a start <code>time</code>, a <code>duration</code> and a
-<code>type</code>. An event also contains extra
-data that is dependent on the type.
+An event MUST have a start <code>time</code> and a <code>type</code>.
+An event also contains extra data that is dependent on the type.
 
-#### time (float)
+### time (float)
 
 <code>time</code> is a float describing a point in time from the time the
 sequence is started.
 
-<code>time</code> values are arbitrary. The actual time an event is played is
-dependent upon the <code>time</code> value of the event AND the rate at which
-the sequence is played. <code>time</code> values do not directly describe
-seconds or beats – although they could if the sequence were played back at the
-correct rate.
+<code>time</code> values are arbitrary – they describe time in beats, rather than
+in absolute time, like seconds. The actual time an event is played is dependent
+upon the rate at which a sequence is played.
 
-#### duration (float)
+### type (string)
 
-<code>duration</code> is a float describing the length of time the event is to
-be played for. As with <code>time</code>, the resulting duration of an event
-depends on the speed the sequence is played at.
+A string describing the type of event. The type determines the structure of the
+rest of the data in the event array:
 
-#### type (string)
+    [time, "note", number, velocity, duration]
+    [time, "control", number, value, curve]
+    [time, "pitch", semitones]
+    [time, "chord", keycentre, mode, duration]
+    [time, "sequence", id]
 
-A string describing the type of the event. Possible values are:
+An event array may hold additional data beyond that defined above. Such data is
+considered application-specific. For example, an application may want to have
+a note or control played by a specific plugin, so it may add an address string
+to the event data:
 
-- <code>"note"</code> A musical note. 
-- <code>"chord"</code> A musical symbol describing the current key centre and mode.
-- <code>"sequence"</code> A sequence event carries the data for a sequence array, enabling the playback of nested sequences.
-- <code>"control"</code> A controller event. <code>duration</code> is <code>0</code>.
-- <code>"pitch"</code> Pitch bend. <code>duration</code> is <code>0</code>.
-- <code>"noteon"</code> and <code>"noteoff"</code>, for carrying MIDI-like note information. <code>duration</code> is <code>0</code>.
+    [time, "note", number, velocity, duration, "objects[id:3]note"]
+    [time, "control", number, value, "objects[id:8]gain"]
 
-#### data
+Implementations may ignore or overwrite application-specific data.
 
-A <code>"note"</code> event must have the data values <code>note number</code> and <code>note velocity</code>:
+#### "note"
 
-    [time, duration, "note", number, velocity]
+    [time, "note", number, velocity, duration]
 
-A <code>"control"</code> event must have the data values <code>number</code> in the range 0-127, and <code>value</code> as a float in the range 0-1. Values outside this range are acceptable, but may be
-lost if converted to MIDI.
+<code>number</code> – INT [0-127], represents the pitch of a note
+<code>velocity</code> – FLOAT [0-1], represents the force of the note's attack
+<code>duration</code> – FLOAT [0-n], represents the duration at the sequence's current rate
 
-    [time, duration, "control", number, value]
+#### "control"
 
-It can also carry an optional string describing an automation curve. A curve should cause
-<code>value</code> to ramp to the new value at <code>time</code>.
+    [time, "control", number, value, curve]
 
-    [time, duration, "control", number, value, "exponential"]
+<code>number</code> – INT [0-127], represents the number of the control
+<code>value</code> – FLOAT [0-1], represents the value of the control
+<code>curve</code> – STRING ["step"|"linear"|"exponential"], represents the type of ramp to use to transition to <code>value</code>
 
-A <code>"pitch"</code> event must have the data value <code>semitones</code>, a float in the range -2 to 2.
+#### "pitch"
 
-    [time, duration, "pitch", semitones]
+    [time, "pitch", semitones]
+
+<code>value</code> – FLOAT [-2 - 2], represents the pitch shift in semitones
 
 It can also carry an optional string describing an automation curve. A curve should cause
 <code>semitones</code> to ramp to the new value at <code>time</code>.
 
     [time, duration, "pitch", semitones, "exponential"]
 
-A <code>"chord"</code> event must have a string that represents the current key centre and mode:
+#### "chord"
 
-    [time, duration, "chord", symbol]
+A chord event could be used by a music renderer to display chord symbols, or could be interpreted
+by a music generator to improvise music.
 
-A chord event can be used by a music renderer to display chord symbols, or can
-be interpreted by a music generator.
+    [time, "chord", root, mode]
 
-A <code>"sequence"</code> event must have an array that contains the data of a 'child' sequence:
-
-    [time, duration, "sequence", array]
-
-Possible curves are:
-
-    "step"
-    "linear"
-    "exponential"
+<code>root</code> – STRING ["A","Bb","B", ... "F#","G","G#"], represents the root of the chord
+<code>mode</code> – STRING ["∆","-", ... TBD], represents the mode of the chord
 
 ## Interpretation (object)
 
-The interpret object contains meta information not directly needed to render the
-music as sound, but required to render music visually.
+The optional interpret object contains meta information not directly needed to render the
+music as sound, but required to render music as notation. A good renderer should
+be capable of making intelligent guesses as to how to interpret Music JSON as
+notation and none of these properties are required.
 
     {
         "time_signature": "4/4",
