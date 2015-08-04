@@ -79,16 +79,16 @@ Implementations may ignore or overwrite application-specific data.
 
     [time, "note", number, velocity, duration]
 
-<code>number</code> – INT [0-127], represents the pitch of a note
-<code>velocity</code> – FLOAT [0-1], represents the force of the note's attack
+<code>number</code> – INT [0-127], represents the pitch of a note<br/>
+<code>velocity</code> – FLOAT [0-1], represents the force of the note's attack<br/>
 <code>duration</code> – FLOAT [0-n], represents the duration at the sequence's current rate
 
 #### "control"
 
     [time, "control", number, value, curve]
 
-<code>number</code> – INT [0-127], represents the number of the control
-<code>value</code> – FLOAT [0-1], represents the value of the control
+<code>number</code> – INT [0-127], represents the number of the control<br/>
+<code>value</code> – FLOAT [0-1], represents the value of the control<br/>
 <code>curve</code> – STRING ["step"|"linear"|"exponential"], represents the type of ramp to use to transition to <code>value</code>
 
 #### "pitch"
@@ -99,13 +99,22 @@ Implementations may ignore or overwrite application-specific data.
 
 #### "chord"
 
-A chord event could be used by a music renderer to display chord symbols, or could be interpreted
-by a music generator to improvise music.
+A chord gives information about the current key centre and mode of the music. A chord event could
+be used by a music renderer to display chord symbols, or could be interpreted by a music generator
+to improvise music.
 
     [time, "chord", root, mode]
 
-<code>root</code> – STRING ["A","Bb","B", ... "F#","G","G#"], represents the root of the chord
+<code>root</code> – STRING ["A","Bb","B", ... "F#","G","G#"], represents the root of the chord<br/>
 <code>mode</code> – STRING ["∆","-", ... TBD], represents the mode of the chord
+
+#### "sequence"
+
+    [time, "sequence", id, rate]
+
+<code>id</code> STRING, an id of another sequence in the current document (TBD)
+<code>rate</code> FLOAT [0-n], the rate at which to play back the sequence relative to the rate of the
+current sequence.
 
 ## interpretation (object)
 
