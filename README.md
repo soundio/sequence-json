@@ -18,17 +18,15 @@ Here are the first two bars of Dolphin Dance represented in Music JSON:
             [3,   "note", 79, 1, 0.5],
             [3.5, "note", 74, 1, 3.5],
             [10,  "note", 76, 1, 0.5],
-            [0,   "chord", "C", "∆", 4],
-            [4,   "chord", "G", "-", 4]
+            [0, "chord", "C", "∆", 4],
+            [4, "chord", "G", "-", 4]
         ],
-
+        
         "interpretation": {
             "time_signature": "4/4",
             "key": "C",
             "transpose": 0
-        },
-
-        "rate": 1,
+        }
     }
 
 ## Sequence (array)
@@ -98,11 +96,6 @@ Implementations may ignore or overwrite application-specific data.
     [time, "pitch", semitones]
 
 <code>value</code> – FLOAT [-2 - 2], represents the pitch shift in semitones
-
-It can also carry an optional string describing an automation curve. A curve should cause
-<code>semitones</code> to ramp to the new value at <code>time</code>.
-
-    [time, duration, "pitch", semitones, "exponential"]
 
 #### "chord"
 
