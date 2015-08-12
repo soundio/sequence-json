@@ -110,9 +110,9 @@ to improvise music.
 
 #### "sequence"
 
-    [time, "sequence", id, rate]
+    [time, "sequence", sequence, rate]
 
-<code>id</code> STRING, an id of another sequence in the current document (TBD)
+<code>sequence</code> ARRAY, an array of events, or STRING, an id of a sequence(TBD)<br/>
 <code>rate</code> FLOAT [0-n], the rate at which to play back the sequence relative to the rate of the
 current sequence.
 
