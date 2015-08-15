@@ -131,9 +131,10 @@ notation and none of these properties are required.
 
 ## Implementations
 
-- <a href="http://github.com/sound-io/midi">MIDI</a> sound.io's MIDI library converts MIDI events to Music JSON events with it's <code>normalise</code> method.
+- <a href="http://github.com/soundio/midi">MIDI</a> Soundio's MIDI library converts MIDI events to Music JSON events with it's <code>normalise</code> method.
+- <a href="http://github.com/soundio/sequence">Sequence</a> Soundio's Sequence object consumes and creates Music JSON. There's a demo at <a href="http://sound.io/sequencer/">sound.io/sequencer</a>.
 - <a href="http://labs.cruncher.ch/scribe/">Scribe</a> is a music notation
-interpreter and SVG renderer that tries to consume Music JSON.
+interpreter and SVG renderer that consume (an old version of) Music JSON.
 
 ## References
 
