@@ -74,7 +74,8 @@ A string describing the type of event. The type determines the structure of the
 rest of the data in the event array:
 
     [time, "note", number, velocity, duration]
-    [time, "control", number, value, curve]
+    [time, "param", name, value, curve]
+    [time, "control", number, value]
     [time, "pitch", semitones]
     [time, "chord", keycentre, mode, duration]
     [time, "sequence", id]
@@ -97,13 +98,22 @@ Implementations may ignore or overwrite application-specific data.
 <code>velocity</code> – FLOAT [0-1], represents the force of the note's attack<br/>
 <code>duration</code> – FLOAT [0-n], represents the duration at the sequence's current rate
 
+#### "param"
+
+    [time, "param", name, value, curve]
+
+<code>name</code> – STRING, the name of the param to control<br/>
+<code>value</code> – FLOAT [0-1], the new value of the control<br/>
+<code>curve</code> – STRING ["step"|"linear"|"exponential"], represents the type of ramp to use to transition to <code>value</code>
+
 #### "control"
+
+Useful for MIDI apps, but it is preferred to use "param" events.
 
     [time, "control", number, value, curve]
 
 <code>number</code> – INT [0-127], represents the number of the control<br/>
 <code>value</code> – FLOAT [0-1], represents the value of the control<br/>
-<code>curve</code> – STRING ["step"|"linear"|"exponential"], represents the type of ramp to use to transition to <code>value</code>
 
 #### "pitch"
 
