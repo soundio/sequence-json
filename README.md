@@ -45,6 +45,20 @@ describe the event.
 An event MUST have a start <code>time</code> and a <code>type</code>.
 An event also contains extra data that is dependent on the type.
 
+    [time, type, data ..., address]
+
+Events MAY have an optional final string, <code>address</code>, that can be
+used by apps to address plugins. It is proposed that a CSS-like syntax be
+used to select objects in an app:
+
+    // Trigger object id 3
+    [time, type, data ..., 'objects[id=3]']
+    
+    // Trigger all plgins of type "sampler"
+    [time, type, data ..., 'objects[type="sampler"]']
+
+
+
 ### time
 
 <code>time</code> is a float describing a point in time from the time the
