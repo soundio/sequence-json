@@ -45,20 +45,6 @@ describe the event.
 An event MUST have a start <code>time</code> and a <code>type</code>.
 An event also contains extra data that is dependent on the type.
 
-    [time, type, data ..., address]
-
-Events MAY have an optional final string, <code>address</code>, that can be
-used by apps to address plugins. It is proposed that a CSS-like syntax be
-used to select objects in an app:
-
-    // Trigger object id 3
-    [time, type, data ..., 'objects[id=3]']
-    
-    // Trigger all plgins of type "sampler"
-    [time, type, data ..., 'objects[type="sampler"]']
-
-
-
 ### time
 
 <code>time</code> is a float describing a point in time from the time the
@@ -143,12 +129,25 @@ to improvise music.
 <code>rate</code> FLOAT [0-n], the rate at which to play back the sequence relative to the rate of the
 current sequence.
 
-Events in the child sequence should be played back on the current sequence. To address the events to
-a new target, include an <code>address</code> parameter.
+Events in the child sequence should be played back on the current sequence.
 
     [time, "sequence", sequence, rate, address]
 
 <code>address</code> NUMBER or STRING, the id or path of an object to play the sequence to.<br/>
+
+Sequence events MAY have an optional final string, <code>address</code>, that can be
+used by apps to address objects for playback.
+
+    // Trigger object id 3
+    [0.5, "sequence", "groove", 1, 3]
+
+It is proposed that a near-CSS-like syntax be used to select objects in an app:
+
+    // Trigger object id 3
+    [0.5, "sequence", "groove", "objects[id=3]"]
+    
+    // Trigger all plugins of type "sampler"
+    [0.5, "sequence", "groove", 1, "objects[type='sampler']"]
 
 
 ## interpretation (object)
