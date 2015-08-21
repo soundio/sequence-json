@@ -90,7 +90,7 @@ separate "noteon" and "noteoff" events (as in MIDI) <a href="http://github.com/s
 
 Useful for MIDI apps, but it is preferred to use "param" events.
 
-    [time, "control", number, value, curve]
+    [time, "control", number, value]
 
 <code>number</code> – INT [0-127], represents the number of the control<br/>
 <code>value</code> – FLOAT [0-1], represents the value of the control<br/>
