@@ -62,7 +62,7 @@ rest of the data in the event array.
     [time, "param", name, value, curve, duration]
     [time, "control", number, value]
     [time, "pitch", semitones]
-    [time, "chord", keycentre, mode, duration]
+    [time, "chord", root, mode, duration]
     [time, "sequence", id, address]
 
 #### "note"
