@@ -47,17 +47,16 @@ An event also contains extra data that is dependent on the type.
 
 ### time
 
-<code>time</code> is a float describing a point in time from the time the
-sequence is started.
+<code>time</code> – FLOAT, describes a point in time from the start of the sequence.
 
 <code>time</code> values are arbitrary – they describe time in beats, rather than
-in absolute time, like seconds. The actual time an event is played is dependent
-upon the rate at which a sequence is played.
+in absolute time, like seconds. The absolute time an event is played is dependent
+upon the rate and the start time of the sequence it inhabits.
 
 ### type
 
-A string describing the type of event. The type determines the structure of the
-rest of the data in the event array:
+<code>type</code> – STRING, the event type. The type determines the structure of the
+rest of the data in the event array.
 
     [time, "note", number, velocity, duration]
     [time, "param", name, value, curve, duration]
