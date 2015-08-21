@@ -79,11 +79,12 @@ separate "noteon" and "noteoff" events (as in MIDI) <a href="http://github.com/s
 
 #### "param"
 
-    [time, "param", name, value, curve]
+    [time, "param", name, value, curve, duration]
 
 <code>name</code> – STRING, the name of the param to control<br/>
 <code>value</code> – FLOAT [0-1], the new value of the control<br/>
 <code>curve</code> – STRING ["step"|"linear"|"exponential"], represents the type of ramp to use to transition to <code>value</code>
+<code>duration</code> – NUMBER [seconds], where <code>curve</code> is not <code>"step"</code>, defines the duration of the curve.
 
 #### "control"
 
