@@ -98,6 +98,9 @@ Implementations may ignore or overwrite application-specific data.
 <code>velocity</code> – FLOAT [0-1], represents the force of the note's attack<br/>
 <code>duration</code> – FLOAT [0-n], represents the duration at the sequence's current rate
 
+<blockquote>We'd welcome feedback on the merits of using a "note" with a duration over
+separate "noteon" and "noteoff" events (as in MIDI) <a href="http://github.com/soundio/music-json/issues">github.com/soundio/music-json/issues</a>.</blockquote> 
+
 #### "param"
 
     [time, "param", name, value, curve]
