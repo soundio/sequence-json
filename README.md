@@ -98,7 +98,7 @@ Useful for MIDI apps, but it is preferred to use "param" events.
 
     [time, "pitch", semitones]
 
-<code>value</code> – FLOAT [-2 - 2], represents the pitch shift in semitones
+<code>value</code> – FLOAT [semitones], represents a pitch shift in semitones
 
 #### "chord"
 
@@ -108,8 +108,8 @@ to improvise music.
 
     [time, "chord", root, mode]
 
-<code>root</code> – STRING ["A","Bb","B", ... "F#","G","G#"], represents the root of the chord<br/>
-<code>mode</code> – STRING ["∆","-", ... TBD], represents the mode of the chord
+<code>root</code> – STRING ["A"|"Bb"|"B" ... "F#"|"G"|"G#"], represents the root of the chord<br/>
+<code>mode</code> – STRING ["∆"|"-" ... TBD], represents the mode of the chord
 
 #### "sequence"
 
