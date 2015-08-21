@@ -143,6 +143,9 @@ to improvise music.
 <code>rate</code> FLOAT [0-n], the rate at which to play back the sequence relative to the rate of the
 current sequence.
 
+Events in the child sequence should be played back on the current sequence. To address the events to
+a new target, include an <code>address</code> parameter.
+
     [time, "sequence", sequence, rate, address]
 
 <code>address</code> NUMBER or STRING, the id or path of an object to play the sequence to.<br/>
