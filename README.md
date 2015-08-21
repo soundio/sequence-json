@@ -143,6 +143,11 @@ to improvise music.
 <code>rate</code> FLOAT [0-n], the rate at which to play back the sequence relative to the rate of the
 current sequence.
 
+    [time, "sequence", sequence, rate, address]
+
+<code>address</code> NUMBER or STRING, the id or path of an object to play the sequence to.<br/>
+
+
 ## interpretation (object)
 
 The optional interpret object contains meta information not directly needed to render the
@@ -165,7 +170,7 @@ interpreter and SVG renderer that consume (an old version of) Music JSON.
 
 ## References
 
-- OSC spec: <a href="http://opensoundcontrol.org/spec-1_0">http://opensoundcontrol.org/spec-1_0</a>
+- OSC spec: <a href="http://opensoundcontrol.org/spec-1_0">http://opensseqoundcontrol.org/spec-1_0</a>
 - OSC example messages: <a href="http://opensoundcontrol.org/files/OSC-Demo.pdf">http://opensoundcontrol.org/files/OSC-Demo.pdf</a>
 - Music XML: <a href="http://www.musicxml.com/for-developers/">http://www.musicxml.com/for-developers/</a>
 - VexFlow: <a href="http://www.vexflow.com/">http://www.vexflow.com/</a>
