@@ -64,17 +64,7 @@ rest of the data in the event array:
     [time, "control", number, value]
     [time, "pitch", semitones]
     [time, "chord", keycentre, mode, duration]
-    [time, "sequence", id]
-
-An event array may hold additional data beyond that defined above. Such data is
-considered application-specific. For example, an application may want to have
-a note or control played by a specific plugin, so it may add an address string
-to the event data:
-
-    [time, "note", number, velocity, duration, "objects[id:3]note"]
-    [time, "control", number, value, "objects[id:8]gain"]
-
-Implementations may ignore or overwrite application-specific data.
+    [time, "sequence", id, address]
 
 #### "note"
 
