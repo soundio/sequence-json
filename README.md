@@ -115,8 +115,8 @@ to improvise music.
 
     [time, "sequence", sequence, rate]
 
-<code>sequence</code> ARRAY, an array of events, or STRING, an id of a sequence(TBD)<br/>
-<code>rate</code> FLOAT [0-n], the rate at which to play back the sequence relative to the rate of the
+<code>sequence</code> – ARRAY, an array of events, or STRING, an id of a sequence(TBD)<br/>
+<code>rate</code> – FLOAT [0-n], the rate at which to play back the sequence relative to the rate of the
 current sequence.
 
 Events in the child sequence should be played back on the current sequence.
@@ -125,7 +125,7 @@ used to select objects for playback.
 
     [time, "sequence", sequence, rate, address]
 
-<code>address</code> NUMBER or STRING, the id or path of an object to play the sequence to.<br/>
+<code>address</code> – NUMBER or STRING, the id or path of an object to play the sequence to.<br/>
 
     // Trigger object id 3
     [0.5, "sequence", "groove", 1, 3]
