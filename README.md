@@ -115,17 +115,17 @@ to improvise music.
 
     [time, "sequence", sequence, rate]
 
-<code>sequence</code> – ARRAY, an array of events, or STRING, an id of a sequence(TBD)<br/>
+<code>sequence</code> – ARRAY|STRING, an array of events or name of a sequence(TBD)<br/>
 <code>rate</code> – FLOAT [0-n], the rate at which to play back the sequence relative to the rate of the
 current sequence.
 
-Events in the child sequence should be played back on the current sequence.
-Sequence events MAY have an optional final string, <code>address</code>, that can be
-used to select objects for playback.
+Events in the child sequence should be played back on the target(s) of the current sequence.
+The sequence event MAY have an optional final parameter, <code>address</code>, that defines
+an alternative target to play the child sequence to.
 
     [time, "sequence", sequence, rate, address]
 
-<code>address</code> – NUMBER or STRING, the id or path of an object to play the sequence to.<br/>
+<code>address</code> – NUMBER|STRING, the id or path of an object to play the sequence to.<br/>
 
     // Trigger object id 3
     [0.5, "sequence", "groove", 1, 3]
