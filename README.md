@@ -130,13 +130,12 @@ to improvise music.
 current sequence.
 
 Events in the child sequence should be played back on the current sequence.
+Sequence events MAY have an optional final string, <code>address</code>, that can be
+used to select objects for playback.
 
     [time, "sequence", sequence, rate, address]
 
 <code>address</code> NUMBER or STRING, the id or path of an object to play the sequence to.<br/>
-
-Sequence events MAY have an optional final string, <code>address</code>, that can be
-used by apps to address objects for playback.
 
     // Trigger object id 3
     [0.5, "sequence", "groove", 1, 3]
