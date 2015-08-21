@@ -60,7 +60,7 @@ A string describing the type of event. The type determines the structure of the
 rest of the data in the event array:
 
     [time, "note", number, velocity, duration]
-    [time, "param", name, value, curve]
+    [time, "param", name, value, curve, duration]
     [time, "control", number, value]
     [time, "pitch", semitones]
     [time, "chord", keycentre, mode, duration]
@@ -83,7 +83,7 @@ separate "noteon" and "noteoff" events (as in MIDI) <a href="http://github.com/s
 
 <code>name</code> – STRING, the name of the param to control<br/>
 <code>value</code> – FLOAT [0-1], the new value of the control<br/>
-<code>curve</code> – STRING ["step"|"linear"|"exponential"], represents the type of ramp to use to transition to <code>value</code>
+<code>curve</code> – STRING ["step"|"linear"|"exponential"], represents the type of ramp to use to transition to <code>value</code><br/>
 <code>duration</code> – NUMBER [seconds], where <code>curve</code> is not <code>"step"</code>, defines the duration of the curve.
 
 #### "control"
