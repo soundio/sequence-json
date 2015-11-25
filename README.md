@@ -32,7 +32,7 @@ Here are the first two bars of Dolphin Dance represented in Music JSON:
 ## sequence
 
 A sequence is an object with the properties <code>name</code> and <code>events</code>,
-where <code>name</name> is a string and <code>events</code> is an array of events.
+where <code>name</code> is a string and <code>events</code> is an array of events.
 
     {
         "name": "My Tune",
