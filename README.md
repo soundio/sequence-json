@@ -169,7 +169,8 @@ interpreter and SVG renderer that consume (an old version of) Music JSON.
 - Music XML: <a href="http://www.musicxml.com/for-developers/">http://www.musicxml.com/for-developers/</a>
 - VexFlow: <a href="http://www.vexflow.com/">http://www.vexflow.com/</a>
 
+<!--
 ## Contributions
 
-Only a few very brief discussions have been had, which have served to identify a
-basic need. People involved: Stephen Band, Stelio Tzonis, Al Johri and Jason Sigal.
+Stephen Band, Stelio Tzonis, Al Johri and Jason Sigal.
+-->
