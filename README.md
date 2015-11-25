@@ -12,7 +12,8 @@ make pull requests.
 Here are the first two bars of Dolphin Dance represented in Music JSON:
 
     {
-        "sequence": [
+        "name": "Dolphin Dance",
+        "events": [
             [2,   "note", 76, 0.8, 0.5],
             [2.5, "note", 77, 0.6, 0.5],
             [3,   "note", 79, 1, 0.5],
@@ -21,7 +22,6 @@ Here are the first two bars of Dolphin Dance represented in Music JSON:
             [0, "chord", "C", "∆", 4],
             [4, "chord", "G", "-", 4]
         ],
-        
         "interpretation": {
             "time_signature": "4/4",
             "key": "C",
@@ -31,9 +31,12 @@ Here are the first two bars of Dolphin Dance represented in Music JSON:
 
 ## sequence
 
-A sequence is an array of events.
+A sequence is an object with the properties <code>name</code> and <code>events</code>,
+where <code>events</code> is an array of events.
 
     [event1, event2, ... ]
+
+<code>interpretation</code> is optional, and is used to give hints to a renderer.
 
 ## event
 
@@ -130,14 +133,14 @@ an alternative target to play the child sequence to.
     // Trigger object id 3
     [0.5, "sequence", "groove", 1, 3]
 
-It is proposed that a near-CSS-like syntax be used to select objects in an app:
+<!--It is proposed that a near-CSS-like syntax be used to select objects in an app:
 
     // Trigger object id 3
     [0.5, "sequence", "groove", "objects[id=3]"]
     
     // Trigger all plugins of type "sampler"
     [0.5, "sequence", "groove", 1, "objects[type='sampler']"]
-
+-->
 
 ## interpretation (object)
 
