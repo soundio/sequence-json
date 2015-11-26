@@ -122,9 +122,9 @@ to improvise music.
 
 #### "sequence"
 
-    [time, "sequence", sequence, rate]
+    [time, "sequence", name, rate]
 
-<code>sequence</code> – ARRAY|STRING, an array of events or name of a sequence(TBD)<br/>
+<code>name</code> – STRING, the name of a sequence found in this sequence's <code>sequences</code> array.<br/>
 <code>rate</code> – FLOAT [0-n], the rate at which to play back the sequence relative to the rate of the
 current sequence.
 
