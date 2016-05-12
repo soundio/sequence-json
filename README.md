@@ -122,9 +122,9 @@ to improvise music.
 
 #### "sequence"
 
-    [time, "sequence", name, rate]
+    [time, "sequence", data, rate]
 
-<code>name</code> – STRING, the name of a sequence found in this sequence's <code>sequences</code> array.<br/>
+<code>data</code> – STRING|OBJECT, the name of a sequence found in this sequence's <code>sequences</code> array, or a sequence object.<br/>
 <code>rate</code> – FLOAT [0-n], the rate at which to play back the sequence relative to the rate of the
 current sequence.
 
