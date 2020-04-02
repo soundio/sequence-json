@@ -19,8 +19,8 @@ Here are the first two bars of Dolphin Dance represented in Music JSON:
             [3,   "note", 79, 1, 0.5],
             [3.5, "note", 74, 1, 3.5],
             [10,  "note", 76, 1, 0.5],
-            [0, "chord", "C", "∆", 4],
-            [4, "chord", "G", "-", 4]
+            [0,   "mode", "C", "∆", 4],
+            [4,   "mode", "G", "-", 4]
         ],
         "interpretation": {
             "time_signature": "4/4",
@@ -55,35 +55,19 @@ The property `sequences` is an array of sequence objects. The property `interpre
 
 ## event
 
-An event is an array describing the time and type and the data needed to
-describe the event.
+An event is an array with a start `beat` and an event `type` as it's first two members.
+An event may contain extra data dependent on `type`.
 
     [beat, type, data ...]
 
-An event has a start `beat` and an event `type` as it's first two members.
-An event may contain extra data dependent on the type as its follwing members.
+`beat` – FLOAT, describes a point in time from the start of the sequence
+`type` – STRING, the event type
 
-### beat
+Beat values are arbitrary – they describe time in beats, rather than in absolute time. In a performance context, the absolute time of a beat is dependent upon the rate and the start time of its parent sequence.
 
-`beat` – FLOAT, describes a point in time from the start of the sequence.
+The type determines the structure of the rest of the data in the event array. The possible types and their data are as follows.
 
-Beat values are arbitrary – they describe time in beats, rather than in absolute time, 
-like seconds. In a performance context, the absolute time an event is played is dependent upon the rate and the 
-start time of its parent sequence.
-
-### type
-
-`type` – STRING, the event type. The type determines the structure of the
-rest of the data in the event array.
-
-    [time, "note", number, velocity, duration]
-    [time, "param", name, value, curve, duration]
-    [time, "control", number, value]
-    [time, "pitch", semitones]
-    [time, "chord", root, mode, duration]
-    [time, "sequence", id, address]
-
-#### "note"
+#### `"note"`
 
     [time, "note", name, velocity, duration]
 
