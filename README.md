@@ -80,7 +80,7 @@ Renders a note.
 
 The `name` parameter is a note pitch represented by a MIDI note number (where 0 represents note "C-1" and 127 represents note "G9"). However unlike MIDI it may be a float, allowing all pitches – tones and microtones – to be represented.
 
-<blockquote>TBD. It may be useful to allow `name` to be a string, allowing notes in any scale, western or not, to be represented by arbitrary names.</blockquote>
+<blockquote>TBD. It may be useful to allow `name` to be a string OR a number. This would allow for notes in any scale, western or not, to be represented by arbitrary names.</blockquote>
 
 #### `"param"`
 
@@ -140,6 +140,8 @@ Renders a sequence from the `sequences` array.
 
     // Make the sequence "groove" play at beat 0.5 through instrument "3"
     [0.5, "sequence", "groove", "3"]
+
+<blockquote>TBD. It is not clear exactly how to spec targetId to select a target instrument in an interoperable manner. In Soundstage, it refers to the id of a node in the `nodes` array, where nodes are WebAudio nodes in the Soundstage graph.</blockquote>
 
 <!--It is proposed that a near-CSS-like syntax be used to select objects in an app:
 
