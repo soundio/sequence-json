@@ -1,6 +1,6 @@
 # Music JSON proposal
 
-A proposal for a standard format for representing music in JSON, with the aim of
+A proposal for a format for representing music in JSON, with the aim of
 making emerging web apps using the new Web Audio and Web MIDI APIs interoperable.
 
 This document is intended as a discussion starter. Please comment, propose ideas and
@@ -12,7 +12,7 @@ make pull requests.
 Here are the first two bars of Dolphin Dance represented in Music JSON:
 
     {
-        "name": "Dolphin Dance",
+        "label": "Dolphin Dance",
         "events": [
             [2,   "note", 76, 0.8, 0.5],
             [2.5, "note", 77, 0.6, 0.5],
@@ -31,40 +31,49 @@ Here are the first two bars of Dolphin Dance represented in Music JSON:
 
 ## sequence
 
-A sequence is an object with the properties <code>name</code> and <code>events</code>,
-where <code>name</code> is a string and <code>events</code> is an array of events.
+A sequence is an object with the properties `id`, `label`, `events`.
 
     {
-        "name": "My Tune",
-        "events": [event1, event2, ...],
-        "sequences": [sequence1, sequence2, ...],
-        "interpretation": {...}
+        "id": "0",
+        "label": "My Sequence",
+        "events": [event1, event2, ...]
     }
 
-A sequence may also optionally contain an array of dependent <code>sequences</code> and
-an <code>interpretation</code> object, which is used to give hints to a renderer.
+The property `id` is a string, and in any array of sequences it must be unique. The property `label` is a string. The property `events` is an array of event objects.
+
+A sequence may also optionally have the properties `sequences` and `interpretation`.
+
+    {
+        "id": "0",
+        "label": "My Sequence",
+        "events": [event1, event2, ...],
+        "sequences": [sequence1, sequence2, ...]
+        "interpetation": {...},
+    }
+
+The property `sequences` is an array of sequence objects. The property `interpretation` is an object containing data to help a music renderer.
 
 ## event
 
 An event is an array describing the time and type and the data needed to
 describe the event.
 
-    [time, type, data ...]
+    [beat, type, data ...]
 
-An event MUST have a start <code>time</code> and a <code>type</code>.
-An event also contains extra data that is dependent on the type.
+An event has a start `beat` and an event `type` as it's first two members.
+An event may contain extra data dependent on the type as its follwing members.
 
-### time
+### beat
 
-<code>time</code> – FLOAT, describes a point in time from the start of the sequence.
+`beat` – FLOAT, describes a point in time from the start of the sequence.
 
-<code>time</code> values are arbitrary – they describe time in beats, rather than
-in absolute time, like seconds. The absolute time an event is played is dependent
-upon the rate and the start time of the sequence it inhabits.
+Beat values are arbitrary – they describe time in beats, rather than in absolute time, 
+like seconds. In a performance context, the absolute time an event is played is dependent upon the rate and the 
+start time of its parent sequence.
 
 ### type
 
-<code>type</code> – STRING, the event type. The type determines the structure of the
+`type` – STRING, the event type. The type determines the structure of the
 rest of the data in the event array.
 
     [time, "note", number, velocity, duration]
@@ -76,32 +85,24 @@ rest of the data in the event array.
 
 #### "note"
 
-    [time, "note", number, velocity, duration]
+    [time, "note", name, velocity, duration]
 
-<code>number</code> – INT [0-127], represents the pitch of a note<br/>
-<code>velocity</code> – FLOAT [0-1], represents the force of the note's attack<br/>
-<code>duration</code> – FLOAT [0-n], represents the duration at the sequence's current rate
+`name`     – FLOAT [0-127], represents the pitch of a note as a MIDI number<br/>
+`velocity` – FLOAT [0-1], represents the force of the note's attack<br/>
+`duration` – FLOAT [0-n], represents the duration of the note in beats
+
+The `name` parameter is a note pitch represented by a MIDI note number (where 0 represents note "C-1" and 127 represents note "G9"). However unlike MIDI it may be a float, allowing all pitches – tones and microtones – to be represented.
 
 <blockquote>We'd welcome feedback on the merits of using a "note" with a duration over
 separate "noteon" and "noteoff" events (as in MIDI) <a href="http://github.com/soundio/music-json/issues">github.com/soundio/music-json/issues</a>.</blockquote> 
 
 #### "param"
 
-    [time, "param", name, value, curve, duration]
+    [beat, "param", name, value, curve]
 
-<code>name</code> – STRING, the name of the param to control<br/>
-<code>value</code> – FLOAT, the new value of the param<br/>
-<code>curve</code> – STRING ["step"|"linear"|"exponential"], represents the type of ramp to use to transition to <code>value</code><br/>
-<code>duration</code> – NUMBER [seconds], where <code>curve</code> is not <code>"step"</code>, defines the duration of the ramp
-
-#### "control"
-
-Useful for MIDI apps, but it is preferred to use "param" events.
-
-    [time, "control", number, value]
-
-<code>number</code> – INT [0-127], represents the number of the control<br/>
-<code>value</code> – FLOAT [0-1], represents the value of the control<br/>
+`name` – STRING, the name of the param to control<br/>
+`value` – FLOAT, the destination value of the param<br/>
+`curve` – STRING ["step"|"linear"|"exponential"|"target"], represents the type of ramp to use to transition to `value`
 
 #### "pitch"
 
@@ -109,35 +110,40 @@ Useful for MIDI apps, but it is preferred to use "param" events.
 
 <code>value</code> – FLOAT [semitones], represents a pitch shift in semitones
 
-#### "chord"
+#### "rate"
 
-A chord gives information about the current key centre and mode of the music. A chord event could
+    [beat, "rate", rate, curve]
+
+`rate` – FLOAT, rate of playback of the parent sequence<br/>
+`curve` – STRING ["step"|"linear"|"exponential"|"target"], represents the type of ramp to use to transition to the new rate
+
+#### "meter"
+
+    [beat, "meter", numerator, denominator]
+
+`numerator` – INT, is the number of meter divisions per bar
+`denominator` – INT, is the duration in beats of a meter division
+
+#### "mode"
+
+A mode provides information about the current key centre and mode of the music. A mode event could
 be used by a music renderer to display chord symbols, or could be interpreted by a music generator
 to improvise music.
 
-    [time, "chord", root, mode]
+    [time, "mode", root, mode]
 
-<code>root</code> – STRING ["A"|"Bb"|"B" ... "F#"|"G"|"G#"], represents the root of the chord<br/>
-<code>mode</code> – STRING ["∆"|"-" ... TBD], represents the mode of the chord
+`root` – STRING ["A"|"Bb"|"B" ... "F#"|"G"|"G#"], represents the root of the chord<br/>
+`mode` – STRING ["∆"|"-" ... TBD], represents the mode of the chord
 
 #### "sequence"
 
-    [time, "sequence", data, rate]
+    [beat, "sequence", sequenceId, targetId]
 
-<code>data</code> – STRING|OBJECT, the name of a sequence found in this sequence's <code>sequences</code> array, or a sequence object.<br/>
-<code>rate</code> – FLOAT [0-n], the rate at which to play back the sequence relative to the rate of the
-current sequence.
+`sequenceId` – STRING, the id of a sequence found in this sequences' `sequences` array<br/>
+`targetId` – STRING, the id of an instrument to play the sequence through<br/>
 
-Events in the child sequence should be played back on the target(s) of the current sequence.
-The sequence event MAY have an optional final parameter, <code>address</code>, that defines
-an alternative target to play the child sequence to.
-
-    [time, "sequence", sequence, rate, address]
-
-<code>address</code> – NUMBER|STRING, the id or path of an object to play the sequence to.<br/>
-
-    // Trigger object id 3
-    [0.5, "sequence", "groove", 1, 3]
+    // Make the sequence "groove" play at beat 0.5 through instrument "3"
+    [0.5, "sequence", "groove", "3"]
 
 <!--It is proposed that a near-CSS-like syntax be used to select objects in an app:
 
@@ -150,13 +156,13 @@ an alternative target to play the child sequence to.
 
 ## interpretation (object)
 
-The optional interpret object contains meta information not directly needed to render the
+The optional interpret object contains meta information not necessarily needed to render
 music as sound, but required to render music as notation. A good renderer should
 be capable of making intelligent guesses as to how to interpret Music JSON as
 notation and none of these properties are required.
 
     {
-        "time_signature": "4/4",
+        "meter": [4, 4],
         "key": "C",
         "transpose": 0
     }
