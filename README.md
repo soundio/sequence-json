@@ -57,8 +57,7 @@ The property `sequences` is an array of sequence objects. Sequences may be neste
 
 ## event
 
-An event is an array with a start `beat` and an event `type` as it's first two members.
-An event may contain extra data dependent on `type`.
+An event is an array with a start `beat` and an event `type` as it's first two members, and extra data depending on `type`.
 
     [beat, type, data ...]
 
