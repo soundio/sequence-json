@@ -14,6 +14,8 @@ Here are the first two bars of Dolphin Dance represented in Music JSON:
     {
         "label": "Dolphin Dance",
         "events": [
+            [0,   "meter", 4, 1],
+            [0,   "rate", 1, "step"],
             [2,   "note", 76, 0.8, 0.5],
             [2.5, "note", 77, 0.6, 0.5],
             [3,   "note", 79, 1, 0.5],
@@ -31,7 +33,7 @@ Here are the first two bars of Dolphin Dance represented in Music JSON:
 
 ## sequence
 
-A sequence is an object with the properties `id`, `label`, `events`.
+A sequence is an object with the properties `id`, `label` and `events`.
 
     {
         "id": "0",
@@ -39,7 +41,7 @@ A sequence is an object with the properties `id`, `label`, `events`.
         "events": [event1, event2, ...]
     }
 
-The property `id` is a string, and in any array of sequences it must be unique. The property `label` is a string. The property `events` is an array of event objects.
+The property `id` is a string, and in any array of sequences it must be unique. The property `label` is an arbitrary string. The property `events` is an array of event objects.
 
 A sequence may also optionally have the properties `sequences` and `interpretation`.
 
@@ -51,7 +53,7 @@ A sequence may also optionally have the properties `sequences` and `interpretati
         "interpetation": {...},
     }
 
-The property `sequences` is an array of sequence objects. The property `interpretation` is an object containing data to help a music renderer.
+The property `sequences` is an array of sequence objects. Sequences may be nested to any arbitrary depth. The property `interpretation` is an object containing data that might help a music renderer display a score.
 
 ## event
 
@@ -60,14 +62,16 @@ An event may contain extra data dependent on `type`.
 
     [beat, type, data ...]
 
-`beat` – FLOAT, describes a point in time from the start of the sequence
+`beat` – FLOAT, describes a point in time from the start of the sequence<br/>
 `type` – STRING, the event type
 
 Beat values are arbitrary – they describe time in beats, rather than in absolute time. In a performance context, the absolute time of a beat is dependent upon the rate and the start time of its parent sequence.
 
-The type determines the structure of the rest of the data in the event array. The possible types and their data are as follows.
+The type determines the structure of the rest of the data in the event array. The possible types and their data are as follows:
 
 #### `"note"`
+
+Renders a note.
 
     [time, "note", name, velocity, duration]
 
@@ -77,10 +81,11 @@ The type determines the structure of the rest of the data in the event array. Th
 
 The `name` parameter is a note pitch represented by a MIDI note number (where 0 represents note "C-1" and 127 represents note "G9"). However unlike MIDI it may be a float, allowing all pitches – tones and microtones – to be represented.
 
-<blockquote>We'd welcome feedback on the merits of using a "note" with a duration over
-separate "noteon" and "noteoff" events (as in MIDI) <a href="http://github.com/soundio/music-json/issues">github.com/soundio/music-json/issues</a>.</blockquote> 
+<blockquote>TBD. It may be useful to allow `name` to be a string, allowing notes in any scale, western or not, to be represented by arbitrary names.</blockquote>
 
-#### "param"
+#### `"param"`
+
+Adjusts an instrument parameter.
 
     [beat, "param", name, value, curve]
 
@@ -88,27 +93,33 @@ separate "noteon" and "noteoff" events (as in MIDI) <a href="http://github.com/s
 `value` – FLOAT, the destination value of the param<br/>
 `curve` – STRING ["step"|"linear"|"exponential"|"target"], represents the type of ramp to use to transition to `value`
 
-#### "pitch"
+<!--
+#### `"pitch"`
 
     [time, "pitch", semitones]
 
 <code>value</code> – FLOAT [semitones], represents a pitch shift in semitones
+-->
 
-#### "rate"
+#### `"rate"`
+
+Changes the tempo the current sequence is playing at.
 
     [beat, "rate", rate, curve]
 
 `rate` – FLOAT, rate of playback of the parent sequence<br/>
 `curve` – STRING ["step"|"linear"|"exponential"|"target"], represents the type of ramp to use to transition to the new rate
 
-#### "meter"
+#### `"meter"`
+
+Changes the displayed meter of the sequence.
 
     [beat, "meter", numerator, denominator]
 
 `numerator` – INT, is the number of meter divisions per bar
 `denominator` – INT, is the duration in beats of a meter division
 
-#### "mode"
+#### `"mode"`
 
 A mode provides information about the current key centre and mode of the music. A mode event could
 be used by a music renderer to display chord symbols, or could be interpreted by a music generator
@@ -119,11 +130,13 @@ to improvise music.
 `root` – STRING ["A"|"Bb"|"B" ... "F#"|"G"|"G#"], represents the root of the chord<br/>
 `mode` – STRING ["∆"|"-" ... TBD], represents the mode of the chord
 
-#### "sequence"
+#### `"sequence"`
+
+Renders a sequence from the `sequences` array.
 
     [beat, "sequence", sequenceId, targetId]
 
-`sequenceId` – STRING, the id of a sequence found in this sequences' `sequences` array<br/>
+`sequenceId` – STRING, the id of a sequence found in the `sequences` array<br/>
 `targetId` – STRING, the id of an instrument to play the sequence through<br/>
 
     // Make the sequence "groove" play at beat 0.5 through instrument "3"
