@@ -20,12 +20,7 @@ Here are the first two bars of Dolphin Dance represented in Music JSON:
         [10,  "note", 76, 1, 0.5],
         [0,   "mode", "C", "∆", 4],
         [4,   "mode", "G", "-", 4]
-    ],
-    "interpretation": {
-        "time_signature": "4/4",
-        "key": "C",
-        "transpose": 0
-    }
+    ]
 }
 ```
 
@@ -43,7 +38,7 @@ A sequence is an object with the properties `id`, `name` and `events`.
 
 The property `id` is a string, and in any array of sequences it must be unique. The property `name` is an arbitrary string. The property `events` is an array of event objects.
 
-A sequence may also optionally have the properties `sequences` and `interpretation`.
+A sequence may also optionally have the property `sequences`.
 
 ```json
 {
@@ -51,11 +46,10 @@ A sequence may also optionally have the properties `sequences` and `interpretati
     "name": "My Sequence",
     "events": [event1, event2, ...],
     "sequences": [sequence1, sequence2, ...]
-    "interpetation": {...},
 }
 ```
 
-The property `sequences` is an array of sequence objects. Sequences may be nested to any arbitrary depth. The property `interpretation` is an object containing data that might help a music renderer display a score.
+The property `sequences` is an array of sequence objects. Sequences may be nested to any arbitrary depth.
 
 ## event
 
@@ -216,21 +210,6 @@ Renders a sequence from the `sequences` array.
 
 <blockquote>TBD. It is not clear exactly how to spec targetId to select a target instrument in an interoperable manner. In Soundstage, it refers to the id of a node in the `nodes` array, where nodes are WebAudio nodes in the Soundstage graph.</blockquote>
 
-
-## interpretation (object)
-
-The optional interpret object contains meta information not necessarily needed to render
-music as sound, but required to render music as notation. A good renderer should
-be capable of making intelligent guesses as to how to interpret Music JSON as
-notation and none of these properties are required.
-
-```json
-{
-    "meter": [4, 4],
-    "key": "C",
-    "transpose": 0
-}
-```
 
 ## Implementations
 
