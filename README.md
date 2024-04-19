@@ -82,12 +82,11 @@ Renders a note.
 [beat, "note", name, gain, duration]
 ```
 
-`name`     – FLOAT [0-127], represents the pitch of a note as a MIDI number
-           – STRING [NN], a note name
+`name`     – FLOAT [0-127] || STRING, represents the pitch of a note<br/>
 `gain`     – FLOAT [0-1], represents the force of the note's attack<br/>
 `duration` – FLOAT [0-n], represents the duration of the note in beats
 
-If `name` is a number, it is a MIDI note number, but may be a float, and so can represent any frequency. MIDI note number `69` is `440Hz`.
+If `name` is a number, it is a MIDI note number, but may be a float and so can represent any frequency. MIDI note number `69` is `440Hz`.
 If `name` is a string it is an arbitrary pitch name. Implementations must accept at least the 128 pitch names `'C0'` - `'G9'`, and 
 the use of both the hash `#` and the unicode sharp `♯`, and both the small letter `b` and the unicode flat `♭` in their spellings.
 
