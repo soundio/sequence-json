@@ -1,10 +1,6 @@
 # Music JSON
 
-A proposal for a format for representing music in JSON, with the aim of
-making emerging web apps using the new Web Audio and Web MIDI APIs interoperable.
-
-This document is intended as a discussion starter. Please comment, propose ideas and
-make pull requests.
+A format for representing music in JSON.
 
 
 ## Example JSON
