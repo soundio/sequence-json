@@ -1,4 +1,4 @@
-# Music JSON proposal
+# Music JSON
 
 A proposal for a format for representing music in JSON, with the aim of
 making emerging web apps using the new Web Audio and Web MIDI APIs interoperable.
