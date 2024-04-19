@@ -74,7 +74,7 @@ The possible types are:
 `clef`
 `key`
 
-#### `"note"`
+### `"note"`
 
 Renders a note.
 
@@ -91,7 +91,7 @@ If `name` is a string it is an arbitrary pitch name. Implementations must accept
 the use of both the hash `#` and the unicode sharp `♯`, and both the small letter `b` and the unicode flat `♭` in their spellings.
 
 
-#### `"param"`
+### `"param"`
 
 Adjusts an instrument parameter.
 
@@ -111,7 +111,7 @@ If `curve` is `"target"`, the event has a sixth parameter:
 `duration` – FLOAT, the decay time of the target curve
 
 
-#### `"rate"`
+### `"rate"`
 
 Changes the tempo the current sequence is playing at.
 
@@ -123,7 +123,7 @@ Changes the tempo the current sequence is playing at.
 `curve` – STRING ["step"|"linear"|"exponential"|"target"], represents the type of ramp to use to transition to the new rate
 
 
-#### `"meter"`
+### `"meter"`
 
 Changes the meter of the sequence.
 
@@ -161,7 +161,7 @@ Where here it is not:
 Meter events have no effect on the rate of the beat clock.
 
 
-#### `"chord"`
+### `"chord"`
 
 A chord event provides information about the root and mode of the music. A chord event can 
 be interpreted by a music generator, or used by a notation renderer to display chord symbols.
@@ -194,7 +194,7 @@ characters describe a mode. The mode identifier may be arbitrary, but these mode
 `+7`       Whole tone
 
 
-#### `"sequence"`
+### `"sequence"`
 
 Renders a sequence from the `sequences` array.
 
