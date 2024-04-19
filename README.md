@@ -102,7 +102,9 @@ Adjusts an instrument parameter.
 
 If `curve` is `"target"`, the event has a sixth parameter:
 
+```js
 [beat, "param", name, value, "target", duration]
+```
 
 `name`     – STRING, the name of the param to control<br/>
 `value`    – FLOAT, the destination value of the param<br/>
