@@ -178,7 +178,7 @@ characters describe a mode. The mode identifier may be arbitrary, but these mode
 | Symbol    | Meaning |
 | :-------- | :------------------------------------|
 | `∆♯11`    | 4th mode of the major scale (lydian) |
-| `∆`,      | 1st mode of the major scale (ionian) |
+| `∆`       | 1st mode of the major scale (ionian) |
 | `7`       | 5th mode of the major scale (myxolydian) |
 | `-7`      | 2nd mode of the major scale (dorian) |
 | `-♭6`     | 6th mode of the major scale (aoelian) |
