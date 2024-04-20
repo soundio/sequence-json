@@ -187,7 +187,7 @@ characters describe a mode. The mode identifier may be arbitrary, but these mode
 | `7♯11`    | 4th mode of melodic minor |
 | `-∆`      | 1st mode of melodic minor |
 | `∆♭6`     | 5th mode of melodic minor |
-| `-7♭9`    | 2nd mode of melodic minor |
+| `-♭9`     | 2nd mode of melodic minor |
 | `ø7`      | 6th mode of melodic minor |
 | `∆♯5`     | 3rd mode of melodic minor |
 | `7alt`    | 7th mode of melodic minor |
