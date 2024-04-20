@@ -175,23 +175,23 @@ be interpreted by a music generator, or used by a notation renderer to display c
 The first one or two characters of a chord name is the root, `C`, `C♯`, `D` ... `A`, `B♭`, `B`. Following
 characters describe a mode. The mode identifier may be arbitrary, but these mode names have fixed meanings:
 
-`∆♯11`     4th mode of the major scale (lydian)
-`∆`,       1st mode of the major scale (ionian)
-`7`        5th mode of the major scale (myxolydian)
-`-7`       2nd mode of the major scale (dorian)
-`-♭6`      6th mode of the major scale (aoelian)
-`7sus♭9`   3rd mode of the major scale (phrygian)
-`ø`        7th mode of the major scale (locrian)
-`7♯11`     4th mode of melodic minor
-`-∆`       1st mode of melodic minor
-`∆♭6`      5th mode of melodic minor
-`-7♭9`     2nd mode of melodic minor
-`ø7`       6th mode of melodic minor
-`∆♯5`      3rd mode of melodic minor
-`7alt`     7th mode of melodic minor
-`°`        Diminished whole tone / half tone
-`7♭9`      Diminished half tone / whole tone
-`+7`       Whole tone
+- `∆♯11`     4th mode of the major scale (lydian)
+- `∆`,       1st mode of the major scale (ionian)
+- `7`        5th mode of the major scale (myxolydian)
+- `-7`       2nd mode of the major scale (dorian)
+- `-♭6`      6th mode of the major scale (aoelian)
+- `7sus♭9`   3rd mode of the major scale (phrygian)
+- `ø`        7th mode of the major scale (locrian)
+- `7♯11`     4th mode of melodic minor
+- `-∆`       1st mode of melodic minor
+- `∆♭6`      5th mode of melodic minor
+- `-7♭9`     2nd mode of melodic minor
+- `ø7`       6th mode of melodic minor
+- `∆♯5`      3rd mode of melodic minor
+- `7alt`     7th mode of melodic minor
+- `°`        Diminished whole tone / half tone
+- `7♭9`      Diminished half tone / whole tone
+- `+7`       Whole tone
 
 
 ### `"sequence"`
