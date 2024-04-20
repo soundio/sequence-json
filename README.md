@@ -176,7 +176,7 @@ The first one or two characters of a chord name is the root, `C`, `C♯`, `D` ..
 characters describe a mode. The mode identifier may be arbitrary, but these mode names have fixed meanings:
 
 | Symbol    | Meaning |
-| --------- | -------------------------------------|
+| :-------- | :------------------------------------|
 | `∆♯11`    | 4th mode of the major scale (lydian) |
 | `∆`,      | 1st mode of the major scale (ionian) |
 | `7`       | 5th mode of the major scale (myxolydian) |
