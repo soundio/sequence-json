@@ -9,7 +9,7 @@ to silently ignore unsupported event types so that users may also sequence their
 
 ## Concepts
 
-The Sequence format defines two data structures, a sequence and an event.
+The Sequence format defines two data structures, a Sequence and an Event.
 
 The Sequence format describes all times and durations in beats. Beat values are arbitrary, and depend on the rate of playback 
 of a sequence. A sequence playing back at a rate of `1` is running at 1 beat per second, so it is following absolute time.
@@ -36,7 +36,7 @@ Here are the first two bars of Dolphin Dance represented as a sequence in JSON:
 ```
 
 
-## sequence
+## Sequence
 
 ```json
 {
@@ -74,16 +74,17 @@ If there are no `"sequence"` events  in the `events` array, the property `sequen
 
 ---
 
-## event
+## Event
 
 ```js
 [beat, type, ...]
 ```
 
-An event is an array with a start `beat` and an event `type` as it's first two members, and a length that depends on `type`.
+`beat` – FLOAT<br/>
+Describes a point in time from the start of the sequence in beats.
 
-`beat` – FLOAT, describes a point in time from the start of the sequence<br/>
-`type` – STRING, the event type, determines the structure of the rest of the data in the event array:
+`type` – STRING<br/>
+The event type, determines the length of the event array and the structure of the rest of its values:
 
 | beat   | type         | 2 | 3 | 4 | 5 |
 | :----- | :----------- | :--- | :--- | :--- | :--- |
