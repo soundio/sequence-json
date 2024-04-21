@@ -175,11 +175,11 @@ Meter is expressed as bar duration and division duration. Here are some common t
 
 | time | event |
 | :--- | :---- |
-| 4/4  | [0, "meter", 4, 1] |
-| 3/4  | [0, "meter", 3, 1] |
-| 6/8  | [0, "meter", 3, 0.5] |
-| 2/4  | [0, "meter", 2, 1] |
-| 7/8  | [0, "meter", 3.5, 0.5] |
+| 4/4  | `[0, "meter", 4, 1]` |
+| 3/4  | `[0, "meter", 3, 1]` |
+| 6/8  | `[0, "meter", 3, 0.5]` |
+| 2/4  | `[0, "meter", 2, 1]` |
+| 7/8  | `[0, "meter", 3.5, 0.5]` |
 
 A meter event MUST occur at a beat that is a full bar from a previous meter event. The second event is valid here:
 
