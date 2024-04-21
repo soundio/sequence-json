@@ -12,6 +12,8 @@ to silently ignore unsupported event types so that users may also sequence their
 The Sequence format describes all times and durations in beats. Beat values are arbitrary, and depend on the rate of playback 
 of a sequence.
 
+The Sequence format defines two data structures, a sequence and an event.
+
 
 ## Example JSON
 
