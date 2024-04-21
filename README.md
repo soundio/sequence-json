@@ -1,11 +1,13 @@
-# Music JSON
+# Sequence JSON
 
-A format for representing music in JSON.
+A format for representing sequences of timed events in JSON. This format is designed to be extensible, as in, it defines a minimal set of events that get music working,
+but consumers are expected to silently ignore unrecognised event types so that users may also sequence other data.
 
+Sequences describe start times and durations in beats. Beat values are arbitrary, and depend on the rate of playback of a sequence.
 
 ## Example JSON
 
-Here are the first two bars of Dolphin Dance represented in Music JSON:
+Here are the first two bars of Dolphin Dance represented as a sequence in JSON:
 
 ```json
 {
@@ -53,17 +55,16 @@ The property `sequences` is an array of sequence objects. Sequences may be neste
 
 ## event
 
-An event is an array with a start `beat` and an event `type` as it's first two members, and extra data depending on `type`.
+An event is an array with a start `beat` and an event `type` as it's first two members, and a length that depends on `type`.
 
 ```js
-[beat, type, data...]
+[beat, type, ...]
 ```
 
 `beat` – FLOAT, describes a point in time from the start of the sequence<br/>
 `type` – STRING, the event type
 
-Beat values are arbitrary – they describe time in beats, rather than in absolute time. `type` determines the structure of the rest of the data in the event array.
-The possible types are:
+`type` determines the structure of the rest of the data in the event array:
 
 | beat   | type         | 2 | 3 | 4 | 5 |
 | :----- | :----------- | :--- | :--- | :--- | :--- |
@@ -73,16 +74,6 @@ The possible types are:
 | `beat` | `"meter"`    | `duration` | `divisor` |  |  |
 | `beat` | `"chord"`    | `root` | `mode` |  |  |
 | `beat` | `"sequence"` | `slug` | `target` | `duration` |  |
-
-
-| beat   | type         | 2      | 3      | 4      | 5      |
-| :----- | :----------- | :----- | :----- | ;----- | :----- |
-| `beat` | `"note"`     | `pitch` | `gain` | `duration` | – |
-| `beat` | `"param"`    | `name` | `value` | `curve` | `duration` |
-| `beat` | `"rate"`     | `number` | – | – | – |
-| `beat` | `"meter"`    | `duration` | `divisor` | – | – |
-| `beat` | `"chord"`    | `root` | `mode` | – | – |
-| `beat` | `"sequence"` | `slug` | `target` | `duration` | – |
 
 ### `"note"`
 
