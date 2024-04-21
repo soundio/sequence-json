@@ -67,8 +67,8 @@ The possible types are:
 
 | beat   | type         | 2 | 3 | 4 | 5 |
 | :----- | :----------- | :--- | :--- | :--- | :--- |
-| `beat` | `"note"`     | `pitch` |  |  |  |
-| `beat` | `"param"`    | |  |  |  |
+| `beat` | `"note"`     | `pitch` | `gain` | `duration` |  |
+| `beat` | `"param"`    | `name` | `value` | `curve` | `duration` |
 | `beat` | `"rate"`     | |  |  |  |
 | `beat` | `"meter"`    | |  |  |  |
 | `beat` | `"chord"`    | |  |  |  |
