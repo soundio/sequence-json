@@ -96,9 +96,9 @@ The event type, determines the length of the event array and the structure of th
 | `beat` | `"sequence"` | `id` | `target` | `duration` |  |
 
 
----
 
-## Event types
+
+---
 
 ### `"note"`
 
@@ -106,15 +106,18 @@ The event type, determines the length of the event array and the structure of th
 [beat, "note", name, gain, duration]
 ```
 
-`name` – FLOAT [0-127] or STRING, represents the pitch of a note.
+`name` – FLOAT [0-127] or STRING<br/>
+Represents the pitch of a note.
 If `name` is a number, it is a MIDI note number, but may be a float and so can represent any frequency. MIDI note number `69` is `440Hz`.
 If `name` is a string it is an arbitrary pitch name. Implementations must accept at least the 128 pitch names `'C0'` - `'G9'`, and 
 the use of both the hash `#` and the unicode sharp `♯`, and both the small letter `b` and the unicode flat `♭` in their spellings.
 
-`gain` – FLOAT [0-1], represents the force of the note's attack.
+`gain` – FLOAT [0-1]<br/>
+Represents the force of the note's attack.
 A `gain` larger than `1` is permissible, but negative `gain` is forbidden.
 
-`duration` – FLOAT [0-n], represents the duration of the note in beats.
+`duration` – FLOAT [0-n]<br/>
+Represents the duration of the note in beats.
 
 ---
 
@@ -126,16 +129,20 @@ A `gain` larger than `1` is permissible, but negative `gain` is forbidden.
 [beat, "param", name, value, "target", duration]
 ```
 
-`name` – STRING, the name of the param to control
+`name` – STRING<br/>
+The name of the param to control.
+In a WebAudio context this would typically map to an AudioParam on the instrument being targetted.
 
-`value` – FLOAT, the destination value of the param
+`value` – FLOAT<br/>
+The destination value of the param.
 
-`curve` – STRING `"step"`, `"linear"`, `"exponential"` or `"target"`.
+`curve` – STRING `"step"`, `"linear"`, `"exponential"` or `"target"`<br/>
 The ramp to use for transition to `value`.
 This parameter is optional. If it is not present the event describes a `"step"` curve.
 If `curve` is `"target"` the event has a fifth parameter:
 
-`duration` – FLOAT, the decay time of the `"target"` curve.
+`duration` – FLOAT<br/>
+The decay time of the `"target"` curve.
 
 ---
 
@@ -172,10 +179,13 @@ as if there were an initial `[0, "rate", 2]` event in the data. A rate of `2` is
 [beat, "meter", duration, division]
 ```
 
-`duration` – INT, is the duration of a bar, in beats
-`division` – INT, is the duration of a division, in beats
+`duration` – INT<br/>
+The duration of a bar, in beats.
 
-Meter is expressed as bar duration and division duration. Here are some common time signatures as meter events:
+`division` – INT<br/>
+The duration of a division, in beats.
+
+Here are some common time signatures as meter events:
 
 | time | event |
 | :--- | :---- |
@@ -185,23 +195,26 @@ Meter is expressed as bar duration and division duration. Here are some common t
 | 2/4  | `[0, "meter", 2, 1]` |
 | 7/8  | `[0, "meter", 3.5, 0.5]` |
 
-A meter event MUST occur at a beat that is a full bar from a previous meter event. The second event is valid here:
+A meter event MUST occur at a beat that is a full bar from a previous meter event. The second event here is valid:
 
 ```json
 [0, "meter", 4, 1]
 [4, "meter", 3, 1]
 ```
 
-Where here it is not:
+Where here it is invalid:
 
 ```json
 [0, "meter", 4, 1]
 [2, "meter", 3, 1]
 ```
 
-Meter events have no effect on the rate of the beat clock (although they may have an effect on a metronome or any rhythm generators playing).
-Where no `"meter"` event is defined at beat `0` consumers should 
-assume a default meter of 4/4 - ie, `[0, "meter", 4, 1]`.
+Consumers may choose to recover from invalid `"meter"` events by pushing them to the start of the following bar,
+or choose to throw an error.
+
+Meter events have no effect on the rate of the beat clock (although they may have an effect on a metronome or 
+rhythm generator). Where no `"meter"` event is defined at beat `0` consumers should assume a default meter of 
+4/4 - ie, `[0, "meter", 4, 1]`.
 
 ---
 
