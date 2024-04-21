@@ -69,10 +69,10 @@ The possible types are:
 | :----- | :----------- | :--- | :--- | :--- | :--- |
 | `beat` | `"note"`     | `pitch` | `gain` | `duration` |  |
 | `beat` | `"param"`    | `name` | `value` | `curve` | `duration` |
-| `beat` | `"rate"`     | |  |  |  |
-| `beat` | `"meter"`    | |  |  |  |
-| `beat` | `"chord"`    | |  |  |  |
-| `beat` | `"sequence"` | |  |  |  |
+| `beat` | `"rate"`     | `number` |  |  |  |
+| `beat` | `"meter"`    | `duration` | `divisor` |  |  |
+| `beat` | `"chord"`    | `root` | `mode` |  |  |
+| `beat` | `"sequence"` | `slug` | `target` | `duration` |  |
 
 
 | beat   | type         | 2      | 3      | 4      | 5      |
