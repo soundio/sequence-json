@@ -37,28 +37,44 @@ Here are the first two bars of Dolphin Dance represented as a sequence in JSON:
 
 ## sequence
 
-A sequence is an object with the properties `id`, `name` and `events`.
-
 ```json
 {
-    "slug": "0",
-    "name": "My Sequence",
-    "events": [event1, event2, ...],
-    "sequences": [sequence1, sequence2, ...]
+    "events": [...]
 }
 ```
 
-`slug` – STRING, in any array of sequences it must be unique, and is used to identify the sequence for playback.
-A top level sequence does not require a `slug`.
+`events` – ARRAY, an array of events.
+An `events` property is the only requirement for a top-level sequence. But a sequence may also have an array of
+sequences, and those also require an `"id"` to be identified for playback by events in `events`.
 
-`name` is an arbitrary string.
+Sequences may also have the properties:
 
-`events` is an array of event objects.
+```json
+{
+    "id": "0",
+    "name": "My Sequence",
+    "url":  "https://...",
+    "events": [...],
+    "sequences": [...]
+}
+```
 
-`sequences` is an array of sequence objects.
-Sequences may be nested to any arbitrary depth, and are played back by `"sequence"` events in their parent sequence's `events` array.
+`id` – STRING, in any array of sequences it must be unique, and is used to identify the sequence for playback.
+A top level sequence does not require an `id`.
+
+`name` – STRING, optional.
+An arbitrary string.
+
+`url` – URL STRING, optional.
+Points to a resource where this sequence can be fetched as JSON.
+
+`events` – ARRAY, required, an array of events.
+
+`sequences`  – ARRAY, optional, an array of sequence objects.
+Sequences are played back by `"sequence"` events in the `events` array.
 If there are no `"sequence"` events  in the `events` array, the property `sequences` is not required.
 
+---
 
 ## event
 
@@ -78,7 +94,7 @@ An event is an array with a start `beat` and an event `type` as it's first two m
 | `beat` | `"rate"`     | `number` |  |  |  |
 | `beat` | `"meter"`    | `duration` | `divisor` |  |  |
 | `beat` | `"chord"`    | `root` | `mode` | `duration` |  |
-| `beat` | `"sequence"` | `slug` | `target` | `duration` |  |
+| `beat` | `"sequence"` | `id` | `target` | `duration` |  |
 
 ---
 
