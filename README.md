@@ -81,7 +81,7 @@ An event is an array with a start `beat` and an event `type` as it's first two m
 
 Renders a note.
 
-`name`     – FLOAT [0-127] || STRING, represents the pitch of a note<br/>
+`name`     – FLOAT [0-127] or STRING, represents the pitch of a note<br/>
 `gain`     – FLOAT [0-1], represents the force of the note's attack<br/>
 `duration` – FLOAT [0-n], represents the duration of the note in beats
 
@@ -166,33 +166,34 @@ A chord event provides information about the root and mode of the music. A chord
 be interpreted by a music generator, or used by a notation renderer to display chord symbols.
 
 ```js
-[beat, "chord", name]
+[beat, "chord", root, mode]
 ```
 
-`name` – STRING, represents the root and mode of a chord
+`root` – INT [0-11] or STRING, represents the root of a chord.
+Where `root` is a number it represents root note as a MIDI number `0-11`.
+Where `root` is a string it must be a root note name, ie. `C`, `C♯`, `D` ... `A`, `B♭`, `B`.
+`mode` – STRING, represents the mode of a chord.
+The mode identifier may be arbitrary, but these mode names have fixed meanings:
 
-The first one or two characters of a chord name is the root, `C`, `C♯`, `D` ... `A`, `B♭`, `B`. Following
-characters describe a mode. The mode identifier may be arbitrary, but these mode names have fixed meanings:
-
-| Symbol    | Meaning |
-| :-------- | :----------------------------------- |
-| `∆♯11`    | 4th mode of the major scale (lydian) |
-| `∆`       | 1st mode of the major scale (ionian) |
-| `7`       | 5th mode of the major scale (myxolydian) |
-| `-7`      | 2nd mode of the major scale (dorian) |
-| `-♭6`     | 6th mode of the major scale (aoelian) |
-| `7sus♭9`  | 3rd mode of the major scale (phrygian) |
-| `ø`       | 7th mode of the major scale (locrian) |
-| `7♯11`    | 4th mode of melodic minor |
-| `-∆`      | 1st mode of melodic minor |
-| `∆♭6`     | 5th mode of melodic minor |
-| `-♭9`     | 2nd mode of melodic minor |
-| `ø7`      | 6th mode of melodic minor |
-| `∆♯5`     | 3rd mode of melodic minor |
-| `7alt`    | 7th mode of melodic minor |
-| `°`       | Diminished whole tone / half tone |
-| `7♭9`     | Diminished half tone / whole tone |
-| `+7`      | Whole tone |
+| Symbol     | Meaning |
+| :--------- | :----------------------------------- |
+| `"∆♯11"`   | 4th mode of the major scale (lydian) |
+| `"∆"`      | 1st mode of the major scale (ionian) |
+| `"7"`      | 5th mode of the major scale (myxolydian) |
+| `"-7"`     | 2nd mode of the major scale (dorian) |
+| `"-♭6"`    | 6th mode of the major scale (aoelian) |
+| `"7sus♭9"` | 3rd mode of the major scale (phrygian) |
+| `"ø"`      | 7th mode of the major scale (locrian) |
+| `"7♯11"`   | 4th mode of melodic minor |
+| `"-∆"`     | 1st mode of melodic minor |
+| `"∆♭6"`    | 5th mode of melodic minor |
+| `"-♭9"`    | 2nd mode of melodic minor |
+| `"ø7"`     | 6th mode of melodic minor |
+| `"∆♯5"`    | 3rd mode of melodic minor |
+| `"7alt"`   | 7th mode of melodic minor |
+| `"°"`      | Diminished whole tone / half tone |
+| `"7♭9"`    | Diminished half tone / whole tone |
+| `"+7"`     | Whole tone |
 
 
 ### `"sequence"`
