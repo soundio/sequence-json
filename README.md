@@ -65,14 +65,14 @@ An event is an array with a start `beat` and an event `type` as it's first two m
 Beat values are arbitrary – they describe time in beats, rather than in absolute time. `type` determines the structure of the rest of the data in the event array.
 The possible types are:
 
-| beat   | type         | 2    | 3    | 4    | 5    |
-| :----- | :----------- | :--- | :--- | ;--- | :--- |
-| `beat` | `"note"`     | `pitch` | `gain` | `duration` |   |
-| `beat` | `"param"`    | `name` | `value` | [`curve`] | [`duration`] |
-| `beat` | `"rate"`     | `number` |   |   |   |
-| `beat` | `"meter"`    | `duration` | `divisor` |   |   |
-| `beat` | `"chord"`    | `root` | `mode` |   |   |
-| `beat` | `"sequence"` | `slug` | `target` | `duration` |   |
+| beat   | type         | 2      | 3      | 4      | 5      |
+| :----- | :----------- | :----- | :----- | ;----- | :----- |
+| `beat` | `"note"`     | `pitch` | `gain` | `duration` | – |
+| `beat` | `"param"`    | `name` | `value` | `curve` | `duration` |
+| `beat` | `"rate"`     | `number` | – | – | – |
+| `beat` | `"meter"`    | `duration` | `divisor` | – | – |
+| `beat` | `"chord"`    | `root` | `mode` | – | – |
+| `beat` | `"sequence"` | `slug` | `target` | `duration` | – |
 
 ### `"note"`
 
@@ -176,7 +176,7 @@ The first one or two characters of a chord name is the root, `C`, `C♯`, `D` ..
 characters describe a mode. The mode identifier may be arbitrary, but these mode names have fixed meanings:
 
 | Symbol    | Meaning |
-| :-------- | :------------------------------------|
+| :-------- | :----------------------------------- |
 | `∆♯11`    | 4th mode of the major scale (lydian) |
 | `∆`       | 1st mode of the major scale (ionian) |
 | `7`       | 5th mode of the major scale (myxolydian) |
