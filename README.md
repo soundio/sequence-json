@@ -73,6 +73,8 @@ An event is an array with a start `beat` and an event `type` as it's first two m
 | `beat` | `"chord"`    | `root` | `mode` |  |  |
 | `beat` | `"sequence"` | `slug` | `target` | `duration` |  |
 
+---
+
 ### `"note"`
 
 ```js
