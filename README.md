@@ -52,7 +52,6 @@ also have the properties:
     "id": "0",
     "name": "My Sequence",
     "url":  "https://...",
-    "events": [...],
     "sequences": [...]
 }
 ```
