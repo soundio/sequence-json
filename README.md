@@ -65,14 +65,14 @@ An event is an array with a start `beat` and an event `type` as it's first two m
 Beat values are arbitrary – they describe time in beats, rather than in absolute time. `type` determines the structure of the rest of the data in the event array.
 The possible types are:
 
-| beat   | type         |
-| :----- | :----------- |
-| `beat` | `"note"`     |
-| `beat` | `"param"`    |
-| `beat` | `"rate"`     |
-| `beat` | `"meter"`    |
-| `beat` | `"chord"`    |
-| `beat` | `"sequence"` |
+| beat   | type         | ting |
+| :----- | :----------- | :--- |
+| `beat` | `"note"`     | |
+| `beat` | `"param"`    | |
+| `beat` | `"rate"`     | |
+| `beat` | `"meter"`    | |
+| `beat` | `"chord"`    | |
+| `beat` | `"sequence"` | |
 
 
 | beat   | type         | 2      | 3      | 4      | 5      |
