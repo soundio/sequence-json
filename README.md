@@ -79,35 +79,35 @@ An event is an array with a start `beat` and an event `type` as it's first two m
 [beat, "note", name, gain, duration]
 ```
 
-Renders a note.
-
-`name`     – FLOAT [0-127] or STRING, represents the pitch of a note<br/>
-`gain`     – FLOAT [0-1], represents the force of the note's attack<br/>
-`duration` – FLOAT [0-n], represents the duration of the note in beats
-
+`name` – FLOAT [0-127] or STRING, represents the pitch of a note.
 If `name` is a number, it is a MIDI note number, but may be a float and so can represent any frequency. MIDI note number `69` is `440Hz`.
 If `name` is a string it is an arbitrary pitch name. Implementations must accept at least the 128 pitch names `'C0'` - `'G9'`, and 
 the use of both the hash `#` and the unicode sharp `♯`, and both the small letter `b` and the unicode flat `♭` in their spellings.
+
+`gain` – FLOAT [0-1], represents the force of the note's attack.
+A `gain` larger than `1` is permissible, but negative `gain` is forbidden.
+
+`duration` – FLOAT [0-n], represents the duration of the note in beats.
 
 
 ### `"param"`
 
 ```js
+[beat, "param", name, value]
 [beat, "param", name, value, curve]
-```
-
-Adjusts an instrument parameter.
-
-If `curve` is `"target"`, the event has a sixth parameter:
-
-```js
 [beat, "param", name, value, "target", duration]
 ```
 
-`name`     – STRING, the name of the param to control<br/>
-`value`    – FLOAT, the destination value of the param<br/>
-`curve`    – STRING ["step"|"linear"|"exponential"|"target"], ramp to use for transition to `value`
-`duration` – FLOAT, the decay time of the target curve
+`name` – STRING, the name of the param to control
+
+`value` – FLOAT, the destination value of the param
+
+`curve` – STRING `"step"`, `"linear"`, `"exponential"` or `"target"`.
+The ramp to use for transition to `value`.
+This parameter is optional. If it is not present the event describes a `"step"` curve.
+If `curve` is `"target"` the event has a fifth parameter:
+
+`duration` – FLOAT, the decay time of the `"target"` curve.
 
 
 ### `"rate"`
@@ -116,10 +116,9 @@ If `curve` is `"target"`, the event has a sixth parameter:
 [beat, "rate", rate, curve]
 ```
 
-Changes the tempo the current sequence is playing at.
+`rate`  – FLOAT, rate of playback of the parent sequence
 
-`rate`  – FLOAT, rate of playback of the parent sequence<br/>
-`curve` – STRING ["step"|"linear"|"exponential"|"target"], represents the type of ramp to use to transition to the new rate
+`curve` – STRING `"step"`, `"linear"`, `"exponential"` or `"target"`, represents the type of ramp to use to transition to the new rate.
 
 
 ### `"meter"`
@@ -127,8 +126,6 @@ Changes the tempo the current sequence is playing at.
 ```js
 [beat, "meter", duration, division]
 ```
-
-Changes the meter of the sequence.
 
 `duration` – INT, is the duration of a bar, in beats
 `division` – INT, is the duration of a division, in beats
@@ -162,9 +159,6 @@ Meter events have no effect on the rate of the beat clock.
 
 ### `"chord"`
 
-A chord event provides information about the root and mode of the music. A chord event can 
-be interpreted by a music generator, or used by a notation renderer to display chord symbols.
-
 ```js
 [beat, "chord", root, mode]
 ```
@@ -172,6 +166,7 @@ be interpreted by a music generator, or used by a notation renderer to display c
 `root` – INT [0-11] or STRING, represents the root of a chord.
 Where `root` is a number it represents root note as a MIDI number `0-11`.
 Where `root` is a string it must be a root note name, ie. `C`, `C♯`, `D` ... `A`, `B♭`, `B`.
+
 `mode` – STRING, represents the mode of a chord.
 The mode identifier may be arbitrary, but these mode names have fixed meanings:
 
@@ -195,6 +190,8 @@ The mode identifier may be arbitrary, but these mode names have fixed meanings:
 | `"7♭9"`    | Diminished half tone / whole tone |
 | `"+7"`     | Whole tone |
 
+A chord event provides information about the root and mode of the music. A chord event can 
+be interpreted by a music generator, or used by a notation renderer to display chord symbols.
 
 ### `"sequence"`
 
