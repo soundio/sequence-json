@@ -73,7 +73,7 @@ An event is an array with a start `beat` and an event `type` as it's first two m
 | `beat` | `"param"`    | `name` | `value` | `curve` | `duration` |
 | `beat` | `"rate"`     | `number` |  |  |  |
 | `beat` | `"meter"`    | `duration` | `divisor` |  |  |
-| `beat` | `"chord"`    | `root` | `mode` |  |  |
+| `beat` | `"chord"`    | `root` | `mode` | `duration` |  |
 | `beat` | `"sequence"` | `slug` | `target` | `duration` |  |
 
 ---
@@ -170,7 +170,7 @@ assume a starting meter of 4/4 - ie, `[0, "meter", 4, 1]`.
 ### `"chord"`
 
 ```js
-[beat, "chord", root, mode]
+[beat, "chord", root, mode, duration]
 ```
 
 `root` – INT [0-11] or STRING, represents the root of a chord.
@@ -199,6 +199,8 @@ The mode identifier may be arbitrary, but these mode names have fixed meanings:
 | `"°"`      | Diminished whole tone / half tone |
 | `"7♭9"`    | Diminished half tone / whole tone |
 | `"+7"`     | Whole tone |
+
+`duration` – FLOAT, the duration of the chord in beats.
 
 A chord event provides information about the root and mode of the music. A chord event can 
 be interpreted by a music generator, or used by a notation renderer to display chord symbols.
