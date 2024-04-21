@@ -12,7 +12,7 @@ to silently ignore unsupported event types so that users may also sequence their
 The Sequence format defines two data structures, a sequence and an event.
 
 The Sequence format describes all times and durations in beats. Beat values are arbitrary, and depend on the rate of playback 
-of a sequence.
+of a sequence. A sequence playing back at a rate of `1` is running at 1 beat per second, so it is following absolute time.
 
 ## Example JSON
 
@@ -23,7 +23,7 @@ Here are the first two bars of Dolphin Dance represented as a sequence in JSON:
     "name": "Dolphin Dance",
     "events": [
         [0,   "meter", 4, 1],
-        [0,   "rate", 1, "step"],
+        [0,   "rate", 2, "step"],
         [2,   "note", 76, 0.8, 0.5],
         [2.5, "note", 77, 0.6, 0.5],
         [3,   "note", 79, 1, 0.5],
@@ -138,12 +138,27 @@ If `curve` is `"target"` the event has a fifth parameter:
 ### `"rate"`
 
 ```js
+[beat, "rate", rate]
 [beat, "rate", rate, curve]
+[beat, "rate", rate, "target", duration]
 ```
 
-`rate`  – FLOAT, rate of playback of the parent sequence
+`rate`  – FLOAT<br/>
+Rate of playback of a sequence. Nominally in beats per second, but sequences may be played
+from other sequences, and rates are accumulative. If sequence A is playing at rate `2` and 
+contains sequence B playing at rate `1.5`, sequence B is playing at an absolute rate of `3`,
+or 3 beats per second, a tempo of 90bpm.
 
-`curve` – STRING `"step"`, `"linear"`, `"exponential"` or `"target"`, represents the type of ramp to use to transition to the new rate.
+`curve` – STRING, optional<br/>
+One of `"step"`, `"linear"`, `"exponential"` or `"target"`. 
+Represents the type of ramp to use to transition to the new rate. Where `curve` is `"target"` a duration is required:
+
+`duration` – STRING, optional<br/>
+Where `curve` is `"target"`, represents the target duration of the target curve.
+
+Where there is no `"rate"` event at beat `0`, consumers should assume a playback rate of `2`,
+as if there were an initial `[0, "rate", 2]` event in the data. A rate of `2` is a tempo of 120bpm.
+
 
 ---
 
@@ -158,13 +173,13 @@ If `curve` is `"target"` the event has a fifth parameter:
 
 Meter is expressed as bar duration and division duration. Here are some common time signatures as meter events:
 
-```json
-[0, "meter", 4, 1]     // 4/4
-[0, "meter", 3, 1]     // 3/4
-[0, "meter", 3, 0.5]   // 6/8
-[0, "meter", 2, 1]     // 2/4
-[0, "meter", 3.5, 0.5] // 7/8
-```
+| time | event |
+| :--- | :---- |
+| 4/4  | [0, "meter", 4, 1] |
+| 3/4  | [0, "meter", 3, 1] |
+| 6/8  | [0, "meter", 3, 0.5] |
+| 2/4  | [0, "meter", 2, 1] |
+| 7/8  | [0, "meter", 3.5, 0.5] |
 
 A meter event MUST occur at a beat that is a full bar from a previous meter event. The second event is valid here:
 
