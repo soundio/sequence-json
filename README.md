@@ -55,16 +55,14 @@ The property `sequences` is an array of sequence objects. Sequences may be neste
 
 ## event
 
-An event is an array with a start `beat` and an event `type` as it's first two members, and a length that depends on `type`.
-
 ```js
 [beat, type, ...]
 ```
 
-`beat` – FLOAT, describes a point in time from the start of the sequence<br/>
-`type` – STRING, the event type
+An event is an array with a start `beat` and an event `type` as it's first two members, and a length that depends on `type`.
 
-`type` determines the structure of the rest of the data in the event array:
+`beat` – FLOAT, describes a point in time from the start of the sequence<br/>
+`type` – STRING, the event type, determines the structure of the rest of the data in the event array:
 
 | beat   | type         | 2 | 3 | 4 | 5 |
 | :----- | :----------- | :--- | :--- | :--- | :--- |
@@ -77,11 +75,11 @@ An event is an array with a start `beat` and an event `type` as it's first two m
 
 ### `"note"`
 
-Renders a note.
-
 ```js
 [beat, "note", name, gain, duration]
 ```
+
+Renders a note.
 
 `name`     – FLOAT [0-127] || STRING, represents the pitch of a note<br/>
 `gain`     – FLOAT [0-1], represents the force of the note's attack<br/>
@@ -94,11 +92,11 @@ the use of both the hash `#` and the unicode sharp `♯`, and both the small let
 
 ### `"param"`
 
-Adjusts an instrument parameter.
-
 ```js
 [beat, "param", name, value, curve]
 ```
+
+Adjusts an instrument parameter.
 
 If `curve` is `"target"`, the event has a sixth parameter:
 
@@ -114,11 +112,11 @@ If `curve` is `"target"`, the event has a sixth parameter:
 
 ### `"rate"`
 
-Changes the tempo the current sequence is playing at.
-
 ```js
 [beat, "rate", rate, curve]
 ```
+
+Changes the tempo the current sequence is playing at.
 
 `rate`  – FLOAT, rate of playback of the parent sequence<br/>
 `curve` – STRING ["step"|"linear"|"exponential"|"target"], represents the type of ramp to use to transition to the new rate
@@ -126,11 +124,11 @@ Changes the tempo the current sequence is playing at.
 
 ### `"meter"`
 
-Changes the meter of the sequence.
-
 ```js
 [beat, "meter", duration, division]
 ```
+
+Changes the meter of the sequence.
 
 `duration` – INT, is the duration of a bar, in beats
 `division` – INT, is the duration of a division, in beats
