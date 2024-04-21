@@ -159,7 +159,8 @@ Where here it is not:
 [2, "meter", 3, 1]
 ```
 
-Meter events have no effect on the rate of the beat clock.
+Meter events have no effect on the rate of the beat clock. Where no `"meter"` event is defined at beat `0` consumers should 
+assume a starting meter of 4/4 - ie, `[0, "meter", 4, 1]`.
 
 ---
 
