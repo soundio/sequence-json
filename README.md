@@ -44,9 +44,8 @@ Here are the first two bars of Dolphin Dance represented as a sequence in JSON:
 ```
 
 `events` – ARRAY, required<br/>
-An array of events, an `events` property is the only requirement for a top-level sequence.
-
-Sequences may also have the properties:
+An array of events. An `events` property is the only requirement for a top-level sequence. Sequences may 
+also have the properties:
 
 ```json
 {
@@ -67,9 +66,6 @@ An arbitrary string.
 
 `url` – URL STRING, optional<br/>
 Points to a resource where this sequence can be fetched as JSON.
-
-`events` – ARRAY, required<br/>
-An array of events.
 
 `sequences`  – ARRAY, optional<br/>
 An array of sequence objects.
