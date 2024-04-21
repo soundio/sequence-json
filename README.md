@@ -1,9 +1,13 @@
 # Sequence JSON
 
-A format for representing sequences of timed events in JSON. This format is designed to be extensible, as in, it defines a minimal set of events that get music working,
-but consumers are expected to silently ignore unrecognised event types so that users may also sequence other data.
+A format for representing sequences of timed events in JSON. This format defines a minimal set of events that get music working,
+with the objective of supporting applications of the WebAudio and WebMIDI APIs. However it is designed to be extensible, as in, 
+consumers are expected to silently ignore unrecognised event types so that users may also sequence their own data.
 
-Sequences describe start times and durations in beats. Beat values are arbitrary, and depend on the rate of playback of a sequence.
+## Concepts
+
+The Sequence format describes all times and durations in beats. Beat values are arbitrary, and depend on the rate of playback 
+of a sequence.
 
 ## Example JSON
 
@@ -26,32 +30,31 @@ Here are the first two bars of Dolphin Dance represented as a sequence in JSON:
 }
 ```
 
+
 ## sequence
 
 A sequence is an object with the properties `id`, `name` and `events`.
 
 ```json
 {
-    "id": "0",
-    "name": "My Sequence",
-    "events": [event1, event2, ...]
-}
-```
-
-The property `id` is a string, and in any array of sequences it must be unique. The property `name` is an arbitrary string. The property `events` is an array of event objects.
-
-A sequence may also optionally have the property `sequences`.
-
-```json
-{
-    "id": "0",
+    "slug": "0",
     "name": "My Sequence",
     "events": [event1, event2, ...],
     "sequences": [sequence1, sequence2, ...]
 }
 ```
 
-The property `sequences` is an array of sequence objects. Sequences may be nested to any arbitrary depth.
+`slug` – STRING, in any array of sequences it must be unique, and is used to identify the sequence for playback.
+A top level sequence does not require a `slug`.
+
+`name` is an arbitrary string.
+
+`events` is an array of event objects.
+
+`sequences` is an array of sequence objects.
+Sequences may be nested to any arbitrary depth, and are played back by `"sequence"` events in their parent sequence's `events` array.
+If there are no `"sequence"` events  in the `events` array, the property `sequences` is not required.
+
 
 ## event
 
