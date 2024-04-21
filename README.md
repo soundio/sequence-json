@@ -282,11 +282,8 @@ Renders a sequence from the `sequences` array. For example, this event plays the
 
 ## Implementations
 
-- <a href="http://sound.io">sound.io</a> creates and exports Music JSON.
-- <a href="http://github.com/soundio/soundstage">Soundstage</a>, the JS library that powers <a href="http://sound.io">sound.io</a>, can be used to edit and play Music JSON in any web page. 
-- <a href="http://github.com/soundio/midi">MIDI</a> Soundio's MIDI library converts MIDI events to Music JSON events with it's <code>normalise</code> method.
-- <a href="http://labs.cruncher.ch/scribe/">Scribe</a> is a music notation
-interpreter and SVG renderer that consumes (an old version of) Music JSON.
+- <a href="http://github.com/soundio/soundstage">Soundstage</a> is a WebAudio wrapper and playback sequencer that consumes and outputs Sequence JSON.
+- <a href="http://github.com/stephband/scribe/">Scribe</a> is a music notation interpreter and HTML renderer that consumes and outputs Sequence JSON. It also parses ABC notation to Sequence JSON, as well as a sequence text format that is basically Sequence JSON without any of the JSON syntax or quote marks, just spaces between values.
 
 ## References
 
