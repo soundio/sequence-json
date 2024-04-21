@@ -91,6 +91,7 @@ A `gain` larger than `1` is permissible, but negative `gain` is forbidden.
 
 `duration` – FLOAT [0-n], represents the duration of the note in beats.
 
+---
 
 ### `"param"`
 
@@ -111,6 +112,7 @@ If `curve` is `"target"` the event has a fifth parameter:
 
 `duration` – FLOAT, the decay time of the `"target"` curve.
 
+---
 
 ### `"rate"`
 
@@ -122,6 +124,7 @@ If `curve` is `"target"` the event has a fifth parameter:
 
 `curve` – STRING `"step"`, `"linear"`, `"exponential"` or `"target"`, represents the type of ramp to use to transition to the new rate.
 
+---
 
 ### `"meter"`
 
@@ -158,6 +161,7 @@ Where here it is not:
 
 Meter events have no effect on the rate of the beat clock.
 
+---
 
 ### `"chord"`
 
@@ -195,23 +199,29 @@ The mode identifier may be arbitrary, but these mode names have fixed meanings:
 A chord event provides information about the root and mode of the music. A chord event can 
 be interpreted by a music generator, or used by a notation renderer to display chord symbols.
 
-### `"sequence"`
+---
 
-Renders a sequence from the `sequences` array.
+### `"sequence"`
 
 ```js
 [beat, "sequence", sequenceId, targetId, duration]
 ```
 
-`sequenceId` – STRING, the id of a sequence found in the `sequences` array<br/>
-`targetId`   – STRING, the id of an instrument to play the sequence through<br/>
-`duration`   – FLOAT,  the duration in beats to play the sequence<br/>
+`sequenceId` – STRING, the id of a sequence found in the `sequences` array
 
-    // Make the sequence "groove" play at beat 0.5 through instrument "3"
-    [0.5, "sequence", "groove", "3"]
+`targetId`   – STRING, the id of an instrument to play the sequence through.
+
+`duration`   – FLOAT,  the duration in beats to play the sequence.
+
+Renders a sequence from the `sequences` array. For example, this event plays the sequence "my-sequence" at beat `0.5` for `3` beats:
+
+```json
+[0.5, "sequence", "my-sequence", 3]
+```
 
 <blockquote>TBD. It is not clear exactly how to spec targetId to select a target instrument in an interoperable manner. In Soundstage, it refers to the id of a node in the `nodes` array, where nodes are WebAudio nodes in the Soundstage graph.</blockquote>
 
+---
 
 ## Implementations
 
