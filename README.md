@@ -95,7 +95,10 @@ The event type, determines the length of the event array and the structure of th
 | `beat` | `"chord"`    | `root` | `mode` | `duration` |  |
 | `beat` | `"sequence"` | `id` | `target` | `duration` |  |
 
+
 ---
+
+## Event types
 
 ### `"note"`
 
