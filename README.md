@@ -43,9 +43,8 @@ Here are the first two bars of Dolphin Dance represented as a sequence in JSON:
 }
 ```
 
-`events` – ARRAY, an array of events.
-An `events` property is the only requirement for a top-level sequence. But a sequence may also have an array of
-sequences, and those also require an `"id"` to be identified for playback by events in `events`.
+`events` – ARRAY, required<br/>
+An array of events, an `events` property is the only requirement for a top-level sequence.
 
 Sequences may also have the properties:
 
@@ -59,18 +58,21 @@ Sequences may also have the properties:
 }
 ```
 
-`id` – STRING, in any array of sequences it must be unique, and is used to identify the sequence for playback.
+`id` – STRING<br/>
+in any array of sequences it must be unique, and is used to identify the sequence for playback.
 A top level sequence does not require an `id`.
 
-`name` – STRING, optional.
+`name` – STRING, optional<br/>
 An arbitrary string.
 
-`url` – URL STRING, optional.
+`url` – URL STRING, optional<br/>
 Points to a resource where this sequence can be fetched as JSON.
 
-`events` – ARRAY, required, an array of events.
+`events` – ARRAY, required<br/>
+An array of events.
 
-`sequences`  – ARRAY, optional, an array of sequence objects.
+`sequences`  – ARRAY, optional<br/>
+An array of sequence objects.
 Sequences are played back by `"sequence"` events in the `events` array.
 If there are no `"sequence"` events  in the `events` array, the property `sequences` is not required.
 
