@@ -110,7 +110,8 @@ The event type, determines the length of the event array and the structure of th
 Represents the pitch of a note.
 If `name` is a number, it is a MIDI note number, but may be a float and so can represent any frequency. MIDI note number `69` is `440Hz`.
 If `name` is a string it is an arbitrary pitch name. Implementations must accept at least the 128 pitch names `'C0'` - `'G9'`, and 
-the use of both the hash `#` and the unicode sharp `♯`, and both the small letter `b` and the unicode flat `♭` in their spellings.
+the use of both the hash `#` and the unicode sharp `♯`, and both the small letter `b` and the unicode flat `♭` in their spellings, but
+output only the unicode spellings in any Sequence data output.
 
 `gain` – FLOAT [0-1]<br/>
 Represents the force of the note's attack.
