@@ -115,7 +115,11 @@ output only the unicode spellings in any Sequence data output.
 
 `gain` – FLOAT [0-1]<br/>
 Represents the force of the note's attack.
-A `gain` larger than `1` is permissible, but negative `gain` is forbidden.
+A `gain` larger than `1` is permissible, but negative `gain` is invalid. And reserved.
+
+> [!NOTE]  
+> It may be that sequences of events will be serialisable to Float32 arrays, at which time -ve integers may be employed to represent
+> ambiguous dynamics such as `"mf"` or `"ff"`. So -ve `gain` is reserved.
 
 `duration` – FLOAT [0-n]<br/>
 Represents the duration of the note in beats.
