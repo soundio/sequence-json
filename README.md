@@ -94,6 +94,8 @@ The event type, determines the length of the event array and the structure of th
 | `beat` | `"meter"`    | `duration` | `divisor` |  |  |
 | `beat` | `"chord"`    | `root` | `mode` | `duration` |  |
 | `beat` | `"sequence"` | `id` | `target` | `duration` |  |
+| `beat` | `"start"`    | reserved |  |  |  |
+| `beat` | `"stop"`     | reserved |  |  |  |
 
 
 
@@ -284,6 +286,26 @@ Renders a sequence from the `sequences` array. For example, this event plays the
 ```
 
 <blockquote>TBD. It is not clear exactly how to spec targetId to select a target instrument in an interoperable manner. In Soundstage, it refers to the id of a node in the `nodes` array, where nodes are WebAudio nodes in the Soundstage graph.</blockquote>
+
+---
+
+### `"start"`
+
+```js
+[beat, "start", identifier, value]
+```
+
+Reserved event name. Basically, both `"note"` and `"sequence"` events, which have duration, may be decomposed into matching `"start"` and `"stop"` events.
+
+---
+
+### `"stop"`
+
+```js
+[beat, "stop", identifier, value]
+```
+
+Reserved event name. See `"start"`.
 
 ---
 
