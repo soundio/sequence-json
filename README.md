@@ -1,6 +1,6 @@
 # Sequence JSON
 
-A format for representing sequences of timed events in JSON.
+A simple format for representing sequences of timed events in JSON.
 
 This format defines a minimal set of events that get music working, with the objective of supporting applications 
 of the WebAudio and WebMIDI APIs. However, it is designed to be extensible. Consumers of Sequence JSON are expected 
