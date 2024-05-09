@@ -278,7 +278,7 @@ be interpreted by a music generator, or used by a notation renderer to display c
 The name of a major key, a capital letter followed optionally by an accidental, as in `"A♭"`, `"A"`, `"A♯"`, `"B♭"`, `"B"`, `"C"`, and so on up to `"G♯"`.
 
 Represents a visual key change in written notation only. Does not affect how a performance sounds.
-Harmonic generators should use `"chord"` events to generate sound based on modes.
+<blockquote>Harmonic generators should use `"chord"` events to generate sound based on modes.</blockquote>
 
 ---
 
