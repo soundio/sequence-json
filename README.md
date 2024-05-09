@@ -93,6 +93,7 @@ The event type, determines the length of the event array and the structure of th
 | `beat` | `"rate"`     | `number` |  |  |  |
 | `beat` | `"meter"`    | `duration` | `divisor` |  |  |
 | `beat` | `"chord"`    | `root` | `mode` | `duration` |  |
+| `beat` | `"key"`      | `name` |  |  |  |
 | `beat` | `"sequence"` | `id` | `target` | `duration` |  |
 | `beat` | `"start"`    | reserved |  |  |  |
 | `beat` | `"stop"`     | reserved |  |  |  |
@@ -267,17 +268,34 @@ be interpreted by a music generator, or used by a notation renderer to display c
 
 ---
 
+### `"key"`
+
+```js
+[beat, "key", name]
+```
+
+`name` – STRING<br/>
+The name of a major key, a capital letter followed optionally by an accidental, as in `"A♭"`, `"A"`, `"A♯"`, `"B♭"`, `"B"`, `"C"`, and so on up to `"G♯"`.
+
+Represents a visual key change in written notation only. Does not affect how a performance sounds.
+Harmonic generators should use `"chord"` events to generate sound based on modes.
+
+---
+
 ### `"sequence"`
 
 ```js
 [beat, "sequence", sequenceId, targetId, duration]
 ```
 
-`sequenceId` – STRING, the id of a sequence found in the `sequences` array
+`sequenceId` – STRING<br/>
+The id of a sequence found in the `sequences` array
 
-`targetId`   – STRING, the id of an instrument to play the sequence through.
+`targetId`   – STRING<br/>
+The id of an instrument to play the sequence through.
 
-`duration`   – FLOAT,  the duration in beats to play the sequence.
+`duration`   – FLOAT<br/>
+The duration in beats to play the sequence.
 
 Renders a sequence from the `sequences` array. For example, this event plays the sequence "my-sequence" at beat `0.5` for `3` beats:
 
