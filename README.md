@@ -53,6 +53,7 @@ An `events` property is the only requirement for a top-level sequence. Sequences
 {
     "id": "0",
     "name": "My Sequence",
+    "author": {...},
     "url":  "https://...",
     "sequences": [...]
 }
@@ -64,6 +65,9 @@ A top level sequence does not require an `id`.
 
 `name` – STRING, optional<br/>
 An arbitrary string.
+
+`author` – OBJECT, optional<br/>
+An object containing details of the author.
 
 `url` – URL STRING, optional<br/>
 Points to a resource where this sequence can be fetched as JSON.
