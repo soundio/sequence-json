@@ -313,7 +313,8 @@ Renders a sequence from the `sequences` array. For example, this event plays the
 [beat, "start", identifier, value]
 ```
 
-Reserved event name. Basically, both `"note"` and `"sequence"` events, which have duration, may be decomposed into matching `"start"` and `"stop"` events.
+Reserved event name. Basically, both `"note"` and `"sequence"` events, which have duration, may be decomposed into matching `"start"` and `"stop"` events without duration in internal implementations.
+Neither should appear in exported SequenceJSON.
 
 ---
 
