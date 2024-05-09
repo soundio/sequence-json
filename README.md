@@ -93,7 +93,7 @@ The event type, determines the length of the event array and the structure of th
 
 | beat   | type         | 2 | 3 | 4 | 5 |
 | :----- | :----------- | :--- | :--- | :--- | :--- |
-| `beat` | `"note"`     | `pitch` | `gain` | `duration` |  |
+| `beat` | `"note"`     | `pitch` | `dynamic` | `duration` |  |
 | `beat` | `"param"`    | `name` | `value` | `curve` | `duration` |
 | `beat` | `"rate"`     | `number` |  |  |  |
 | `beat` | `"meter"`    | `duration` | `divisor` |  |  |
@@ -111,7 +111,7 @@ The event type, determines the length of the event array and the structure of th
 ### `"note"`
 
 ```js
-[beat, "note", name, gain, duration]
+[beat, "note", name, dynamic, duration]
 ```
 
 `name` – FLOAT [0-127] or STRING<br/>
@@ -121,15 +121,9 @@ If `name` is a string it is an arbitrary pitch name. Implementations must accept
 the use of both the hash `#` and the unicode sharp `♯`, and both the small letter `b` and the unicode flat `♭` in their spellings, but
 output only the unicode spellings in any Sequence data output.
 
-`gain` – FLOAT [0-1]<br/>
+`dynamic` – FLOAT [0-1]<br/>
 Represents the force of the note's attack.
-A `gain` larger than `1` is permissible, but negative `gain` is invalid. And reserved.
-
-<!--
-> [!NOTE]  
-> It may be that sequences of events will be serialisable to Float32 arrays, at which time -ve integers may be employed to represent
-> ambiguous dynamics such as `"mf"` or `"ff"`. So -ve `gain` is reserved.
--->
+A `dynamic` larger than `1` is permissible, but negative `dynamic` is invalid.
 
 `duration` – FLOAT [0-n]<br/>
 Represents the duration of the note in beats.
