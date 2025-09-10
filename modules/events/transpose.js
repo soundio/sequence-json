@@ -1,6 +1,6 @@
 
 import transposeEvent from '../events/transpose.js';
 
-export default function transpose(transpose, events) {
-    return events.map((event) => transposeEvent(transpose, event));
+export default function transpose(n, events) {
+    return events.map((event) => transposeEvent(n, event));
 }
