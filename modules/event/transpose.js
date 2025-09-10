@@ -1,10 +1,10 @@
 
 import id       from 'fn/id.js';
 import overload from 'fn/overload.js';
-import { toRootNumber } from 'midi/note.js';
+import { toNoteNumber, toRootNumber } from 'midi/note.js';
 
 export default overload((n, event) => event[1], {
-    note: (tranpose, event) => {
+    note: (n, event) => {
         // TODO: do not n GM drum string names
         event[2] = toNoteNumber(event[2]) + n;
         return event;

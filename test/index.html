@@ -1,0 +1,19 @@
+<script type="importmap">{
+    "imports": {
+        "dom/":      "https://cdn.jsdelivr.net/gh/stephband/dom@1.4.1/modules/",
+        "fn/":       "https://cdn.jsdelivr.net/gh/stephband/fn@1.5.1/modules/",
+        "sequence/": "https://cdn.jsdelivr.net/gh/soundio/sequence@0.0.1/modules/",
+        "midi/":     "https://cdn.jsdelivr.net/gh/stephband/midi@1.1.0/modules/"
+    }
+}</script>
+
+<h1>Sequence Test</h1>
+
+<script type="module">
+    import transpose from '../modules/events/transpose.js';
+
+    console.log(transpose(0, []));
+    console.log(transpose(3, [[2, "note", 76, 0.8, 0.5]]));
+    console.log(transpose(3, [[2, "chord", 0, 'maj', 4]]));
+    console.log(transpose(3, [[2, "note", 76, 0.8, 0.5], [2, "chord", 0, 'maj', 4]]));
+</script>
