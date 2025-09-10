@@ -9,7 +9,7 @@ to silently ignore unsupported event types so that users may also sequence their
 
 ## Concepts
 
-The Sequence format defines two data structures, a Sequence object and an Event array.
+The Sequence format defines two data structures, a Sequence object and an Events array.
 
 SequenceJSON describes all times and durations in beats. Beat values are arbitrary, and depend on the rate of playback 
 of a sequence. A sequence playing back at a rate of `1` is running at 1 beat per second, so it is following absolute time.
